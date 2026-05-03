@@ -195,13 +195,31 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <div class="flex flex-wrap items-center gap-3">
                 <span class="text-xs text-gray-500 font-bold uppercase tracking-wide">Filter:</span>
-                <button class="filter-btn type-filter active text-xs font-bold border border-white/20 text-gray-300 px-4 py-1.5 rounded-full" data-value="all">All</button>
-                <button class="filter-btn type-filter text-xs font-bold border border-white/20 text-gray-300 px-4 py-1.5 rounded-full" data-value="domestic">
-                    <i class="fas fa-flag mr-1 text-[#009E83]"></i>Incredible India
-                </button>
-                <button class="filter-btn type-filter text-xs font-bold border border-white/20 text-gray-300 px-4 py-1.5 rounded-full" data-value="international">
-                    <i class="fas fa-globe mr-1 text-[#FFBC00]"></i>International
-                </button>
+                <div class="flex flex-wrap gap-1.5">
+                    <button class="filter-btn type-filter active text-xs font-bold border border-white/20 text-gray-300 px-4 py-1.5 rounded-full" data-value="all">All</button>
+                    <button class="filter-btn type-filter text-xs font-bold border border-white/20 text-gray-300 px-4 py-1.5 rounded-full" data-value="domestic">
+                        <i class="fas fa-flag mr-1 text-[#009E83]"></i>India
+                    </button>
+                    <button class="filter-btn type-filter text-xs font-bold border border-white/20 text-gray-300 px-4 py-1.5 rounded-full" data-value="international">
+                        <i class="fas fa-globe mr-1 text-[#FFBC00]"></i>International
+                    </button>
+                </div>
+                <span class="text-gray-600">|</span>
+                <span class="text-xs text-gray-500 font-bold uppercase tracking-wide">Budget:</span>
+                <div class="flex flex-wrap gap-1.5">
+                    <button class="filter-btn budget-filter active text-xs font-bold border border-white/20 text-gray-300 px-4 py-1.5 rounded-full" data-value="all">Any</button>
+                    <button class="filter-btn budget-filter text-xs font-bold border border-white/20 text-gray-300 px-4 py-1.5 rounded-full" data-value="budget">Under ₹25K</button>
+                    <button class="filter-btn budget-filter text-xs font-bold border border-white/20 text-gray-300 px-4 py-1.5 rounded-full" data-value="mid">₹25K–50K</button>
+                    <button class="filter-btn budget-filter text-xs font-bold border border-white/20 text-gray-300 px-4 py-1.5 rounded-full" data-value="luxury">₹50K+</button>
+                </div>
+                <span class="text-gray-600">|</span>
+                <span class="text-xs text-gray-500 font-bold uppercase tracking-wide">Duration:</span>
+                <div class="flex flex-wrap gap-1.5">
+                    <button class="filter-btn duration-filter active text-xs font-bold border border-white/20 text-gray-300 px-4 py-1.5 rounded-full" data-value="all">Any</button>
+                    <button class="filter-btn duration-filter text-xs font-bold border border-white/20 text-gray-300 px-4 py-1.5 rounded-full" data-value="short">3–5 Days</button>
+                    <button class="filter-btn duration-filter text-xs font-bold border border-white/20 text-gray-300 px-4 py-1.5 rounded-full" data-value="medium">5–7 Days</button>
+                    <button class="filter-btn duration-filter text-xs font-bold border border-white/20 text-gray-300 px-4 py-1.5 rounded-full" data-value="long">7+ Days</button>
+                </div>
                 <div class="ml-auto flex items-center gap-2 text-xs text-gray-500">
                     <i class="fas fa-map-marked-alt text-[#009E83]"></i>
                     <span id="results-count">– destinations</span>
@@ -292,7 +310,7 @@
     <script>
     (function() {
         let allDestinations = [];
-        let filters = { type: 'all', search: '' };
+        let filters = { type: 'all', budget: 'all', duration: 'all', search: '' };
 
         window.scrollCarousel = function(id, dir) {
             const el = document.getElementById(id);
@@ -301,17 +319,48 @@
             el.scrollBy({ left: dir === 'left' ? -amount : amount, behavior: 'smooth' });
         };
 
-        fetch('../data/destinations.json')
-            .then(r => r.json())
-            .then(data => {
-                allDestinations = Object.values(data.destinations);
-                renderAll();
-                setupFilters();
-            })
-            .catch(err => console.error('Failed to load destinations:', err));
+        function extractBudgetNum(priceStr) {
+            const m = String(priceStr).replace(/,/g, '').match(/(\d+)/);
+            return m ? parseInt(m[1]) : 0;
+        }
+
+        function extractDaysNum(durationStr) {
+            const m = String(durationStr).match(/(\d+)/);
+            return m ? parseInt(m[1]) : 0;
+        }
+
+        function destMatchesBudget(dest, budgetFilter) {
+            if (budgetFilter === 'all') return true;
+            const packages = dest.packages || [];
+            return packages.some(pkg => {
+                const price = extractBudgetNum(pkg.price);
+                switch (budgetFilter) {
+                    case 'budget': return price < 25000;
+                    case 'mid': return price >= 25000 && price <= 50000;
+                    case 'luxury': return price > 50000;
+                    default: return true;
+                }
+            });
+        }
+
+        function destMatchesDuration(dest, durationFilter) {
+            if (durationFilter === 'all') return true;
+            const packages = dest.packages || [];
+            return packages.some(pkg => {
+                const days = extractDaysNum(pkg.duration);
+                switch (durationFilter) {
+                    case 'short': return days >= 3 && days <= 5;
+                    case 'medium': return days >= 5 && days <= 7;
+                    case 'long': return days > 7;
+                    default: return true;
+                }
+            });
+        }
 
         function matchesFilters(dest) {
             if (filters.type !== 'all' && dest.type !== filters.type) return false;
+            if (!destMatchesBudget(dest, filters.budget)) return false;
+            if (!destMatchesDuration(dest, filters.duration)) return false;
             if (filters.search) {
                 const q = filters.search.toLowerCase();
                 const hay = (dest.name + ' ' + dest.tagline + ' ' + (dest.highlights || []).join(' ')).toLowerCase();
@@ -321,7 +370,13 @@
         }
 
         function buildCard(dest) {
+            const lowestPkg = (dest.packages || []).reduce((min, p) => {
+                const price = extractBudgetNum(p.price);
+                const curMin = extractBudgetNum(min.price);
+                return price < curMin ? p : min;
+            }, dest.packages?.[0] || {});
             const tagLabel = dest.type === 'domestic' ? 'India' : 'International';
+            const priceText = lowestPkg.price ? `From ${lowestPkg.price}/person` : '';
             return `
                 <div class="scrolling-card">
                     <a href="region.html?id=${dest.id}" class="dest-card">
@@ -335,6 +390,7 @@
                             <div class="dest-card-hover">
                                 <span class="dest-card-hover-tag">${tagLabel}</span>
                                 <p class="dest-card-hover-desc">${dest.tagline}</p>
+                                ${priceText ? `<p class="text-xs text-[#FFBC00] font-semibold mb-2">${priceText}</p>` : ''}
                                 <span class="dest-card-hover-link">
                                     Explore
                                     <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
@@ -351,11 +407,11 @@
 
             document.getElementById('domestic-carousel').innerHTML = domestic.length
                 ? domestic.map(buildCard).join('')
-                : '<div class="text-gray-500 text-sm py-8 px-4">No domestic destinations match your search.</div>';
+                : '<div class="text-gray-500 text-sm py-8 px-4">No domestic destinations match your filters.</div>';
 
             document.getElementById('international-carousel').innerHTML = intl.length
                 ? intl.map(buildCard).join('')
-                : '<div class="text-gray-500 text-sm py-8 px-4">No international destinations match your search.</div>';
+                : '<div class="text-gray-500 text-sm py-8 px-4">No international destinations match your filters.</div>';
 
             document.getElementById('domestic-count').textContent = `${domestic.length} destination${domestic.length !== 1 ? 's' : ''}`;
             document.getElementById('international-count').textContent = `${intl.length} destination${intl.length !== 1 ? 's' : ''}`;
@@ -370,14 +426,20 @@
         }
 
         function setupFilters() {
-            document.querySelectorAll('.type-filter').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    document.querySelectorAll('.type-filter').forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    filters.type = btn.dataset.value;
-                    renderAll();
+            function bindGroup(selector, filterKey) {
+                document.querySelectorAll(selector).forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        document.querySelectorAll(selector).forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        filters[filterKey] = btn.dataset.value;
+                        renderAll();
+                    });
                 });
-            });
+            }
+
+            bindGroup('.type-filter', 'type');
+            bindGroup('.budget-filter', 'budget');
+            bindGroup('.duration-filter', 'duration');
 
             let searchTimeout;
             document.getElementById('search-input').addEventListener('input', e => {
@@ -389,13 +451,24 @@
             });
 
             document.getElementById('reset-filters').addEventListener('click', () => {
-                filters = { type: 'all', search: '' };
+                filters = { type: 'all', budget: 'all', duration: 'all', search: '' };
                 document.getElementById('search-input').value = '';
-                document.querySelectorAll('.type-filter').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                 document.querySelector('.type-filter[data-value="all"]').classList.add('active');
+                document.querySelector('.budget-filter[data-value="all"]').classList.add('active');
+                document.querySelector('.duration-filter[data-value="all"]').classList.add('active');
                 renderAll();
             });
         }
+
+        fetch('../data/destinations.json')
+            .then(r => r.json())
+            .then(data => {
+                allDestinations = Object.values(data.destinations);
+                renderAll();
+                setupFilters();
+            })
+            .catch(err => console.error('Failed to load destinations:', err));
     })();
     </script>
 </body>
