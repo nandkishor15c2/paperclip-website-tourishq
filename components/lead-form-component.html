@@ -1,0 +1,203 @@
+<!-- TOURISHQ LEAD FORM COMPONENT -->
+<!-- Loaded dynamically by js/components.js into #lead-form-placeholder -->
+<!-- Replace YOUR_EMAIL below with the real contact email (e.g., info@tourishq.com) -->
+
+<div id="lead-form-lightbox" class="hidden fixed inset-0 z-[200] flex items-center justify-center p-4">
+    <div id="lead-form-backdrop" class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+
+    <div class="relative w-full max-w-2xl bg-[#1a1a1a] border border-white/10 rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto">
+
+        <!-- Close Button -->
+        <button id="close-lead-form" class="absolute top-4 right-4 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors">
+            <i class="fas fa-times"></i>
+        </button>
+
+        <!-- Product Summary Header (shown when opened with product data) -->
+        <div id="lead-product-summary" class="hidden">
+            <div class="relative h-40 overflow-hidden">
+                <img id="lead-product-img" src="" alt="" class="w-full h-full object-cover">
+                <button id="close-lead-form-img" class="absolute top-3 right-3 w-9 h-9 flex items-center justify-center rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-black/40 to-transparent"></div>
+                <div class="absolute bottom-4 left-5 right-5">
+                    <p id="lead-product-title" class="font-bold text-white text-lg leading-tight"></p>
+                    <p id="lead-product-price" class="text-[#FFBC00] text-sm font-semibold mt-1"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Default Header (shown when opened without product data) -->
+        <div id="lead-default-header" class="p-6 pb-0">
+            <div class="flex items-center gap-3 mb-1">
+                <div class="w-10 h-10 rounded-full bg-[#009E83]/20 flex items-center justify-center">
+                    <i class="fas fa-paper-plane text-[#009E83]"></i>
+                </div>
+                <div>
+                    <h2 class="text-xl font-bold text-white" style="font-family: 'Montserrat', sans-serif;">Get Your Free Quote</h2>
+                    <p class="text-gray-400 text-sm">Our travel architect responds within 4 hours</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form -->
+        <form
+            action="https://formsubmit.co/YOUR_EMAIL"
+            method="POST"
+            class="p-6 space-y-4"
+        >
+            <!-- FormSubmit configuration -->
+            <input type="hidden" name="_subject" value="New Travel Enquiry — Tourishq">
+            <input type="hidden" name="_next" value="https://tourishq.com/thank-you.html">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+
+            <!-- Hidden product/source fields -->
+            <input type="hidden" id="lead_product_name" name="product_name">
+            <input type="hidden" id="lead_product_url" name="product_url">
+            <input type="hidden" id="lead_landing_url" name="landing_url">
+            <input type="hidden" id="lead_source" name="source" value="Website">
+
+            <!-- Row 1: Name + Phone -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1.5">Full Name *</label>
+                    <input
+                        type="text"
+                        name="name"
+                        required
+                        placeholder="Your name"
+                        class="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder-gray-500 text-sm focus:outline-none focus:ring-2 focus:ring-[#009E83] focus:border-transparent transition-all"
+                    >
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1.5">Phone *</label>
+                    <input
+                        type="tel"
+                        name="phone"
+                        required
+                        placeholder="+91 98765 43210"
+                        class="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder-gray-500 text-sm focus:outline-none focus:ring-2 focus:ring-[#009E83] focus:border-transparent transition-all"
+                    >
+                </div>
+            </div>
+
+            <!-- Row 2: Email -->
+            <div>
+                <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1.5">Email *</label>
+                <input
+                    type="email"
+                    name="email"
+                    required
+                    placeholder="you@example.com"
+                    class="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder-gray-500 text-sm focus:outline-none focus:ring-2 focus:ring-[#009E83] focus:border-transparent transition-all"
+                >
+            </div>
+
+            <!-- Row 3: Destination + Duration -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1.5">Destination</label>
+                    <input
+                        type="text"
+                        id="destination"
+                        name="destination"
+                        placeholder="e.g. Bali, Rajasthan"
+                        class="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder-gray-500 text-sm focus:outline-none focus:ring-2 focus:ring-[#009E83] focus:border-transparent transition-all"
+                    >
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1.5">Duration</label>
+                    <input
+                        type="text"
+                        id="duration"
+                        name="duration"
+                        placeholder="e.g. 7 Days / 6 Nights"
+                        class="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder-gray-500 text-sm focus:outline-none focus:ring-2 focus:ring-[#009E83] focus:border-transparent transition-all"
+                    >
+                </div>
+            </div>
+
+            <!-- Row 4: Travel Date + Group Size -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1.5">Approx Travel Date</label>
+                    <input
+                        type="date"
+                        name="travel_date"
+                        class="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#009E83] focus:border-transparent transition-all"
+                        style="color-scheme: dark;"
+                    >
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1.5">Group Size</label>
+                    <input
+                        type="number"
+                        name="group_size"
+                        min="1"
+                        max="50"
+                        placeholder="e.g. 2"
+                        class="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder-gray-500 text-sm focus:outline-none focus:ring-2 focus:ring-[#009E83] focus:border-transparent transition-all"
+                    >
+                </div>
+            </div>
+
+            <!-- Row 5: Budget -->
+            <div>
+                <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1.5">Budget per Person</label>
+                <select
+                    name="budget"
+                    class="w-full bg-[#2a2a2a] border border-white/15 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#009E83] focus:border-transparent transition-all appearance-none"
+                >
+                    <option value="" disabled selected>Select your budget range</option>
+                    <option value="Under ₹20,000">Under ₹20,000</option>
+                    <option value="₹20,000 – ₹50,000">₹20,000 – ₹50,000</option>
+                    <option value="₹50,000 – ₹1,00,000">₹50,000 – ₹1,00,000</option>
+                    <option value="Above ₹1,00,000">Above ₹1,00,000 (Luxury)</option>
+                    <option value="Flexible">Flexible / Let me know options</option>
+                </select>
+            </div>
+
+            <!-- Row 6: Message -->
+            <div>
+                <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1.5">Any special requests or questions?</label>
+                <textarea
+                    name="message"
+                    rows="3"
+                    placeholder="Tell us more about your dream trip — interests, dietary needs, special occasions..."
+                    class="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder-gray-500 text-sm focus:outline-none focus:ring-2 focus:ring-[#009E83] focus:border-transparent transition-all resize-none"
+                ></textarea>
+            </div>
+
+            <!-- Submit -->
+            <button
+                type="submit"
+                class="w-full bg-[#009E83] hover:bg-[#007a66] text-white font-bold py-4 rounded-xl transition-all duration-300 hover:-translate-y-0.5 shadow-lg shadow-[#009E83]/20 hover:shadow-[#009E83]/40 flex items-center justify-center gap-2 text-base"
+            >
+                <i class="fas fa-paper-plane"></i>
+                Send My Enquiry
+            </button>
+
+            <p class="text-center text-gray-500 text-xs">
+                <i class="fas fa-lock mr-1"></i>
+                Your information is secure. We respond within 4 hours.
+            </p>
+        </form>
+
+        <!-- Trust bar -->
+        <div class="border-t border-white/5 px-6 py-4 flex flex-wrap justify-center gap-6 text-xs text-gray-500">
+            <span><i class="fas fa-check-circle text-[#009E83] mr-1"></i>Free Consultation</span>
+            <span><i class="fas fa-check-circle text-[#009E83] mr-1"></i>No Hidden Fees</span>
+            <span><i class="fas fa-check-circle text-[#009E83] mr-1"></i>100% Customizable</span>
+            <span><i class="fas fa-check-circle text-[#009E83] mr-1"></i>24/7 Support</span>
+        </div>
+    </div>
+</div>
+
+<script>
+// Initialize lead form logic once this component is injected
+function initializeLeadForm() {
+    // This function is called by components.js after injecting this HTML
+    // The actual modal open/close logic is in components.js initializeModalLogic()
+}
+</script>

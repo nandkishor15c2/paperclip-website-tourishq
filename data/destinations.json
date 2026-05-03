@@ -1,0 +1,929 @@
+{
+  "destinations": {
+    "rajasthan": {
+      "id": "rajasthan",
+      "name": "Rajasthan",
+      "type": "domestic",
+      "tagline": "Land of Kings, Colors & Timeless Heritage",
+      "description": "Rajasthan is India's largest state and a treasure trove of royal palaces, ancient forts, and vibrant desert culture. From the Pink City of Jaipur to the Blue City of Jodhpur, the romantic lakes of Udaipur, and the golden sands of Jaisalmer, every corner tells a story of valor and grandeur.",
+      "heroImage": "../images/rajasthanactive.jpg",
+      "gallery": [
+        "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=800",
+        "https://images.unsplash.com/photo-1477587458883-47145ed68b1a?w=800",
+        "https://images.unsplash.com/photo-1599661046289-e31897b8e4e5?w=800",
+        "https://images.unsplash.com/photo-1585320806297-9794b3e4aaae?w=800",
+        "https://images.unsplash.com/photo-1617517744476-a94db9c9c41b?w=800",
+        "https://images.unsplash.com/photo-1578632292335-df3abbb0d586?w=800"
+      ],
+      "highlights": ["Jaipur", "Jodhpur", "Udaipur", "Jaisalmer", "Pushkar", "Ranthambore"],
+      "bestTime": "October – March",
+      "seo": {
+        "title": "Rajasthan Tour Packages | Tourishq Travel Solutions",
+        "description": "Explore Rajasthan with Tourishq — handpicked packages covering Jaipur, Jodhpur, Udaipur & Jaisalmer. Budget to luxury options starting from ₹18,999."
+      },
+      "packages": [
+        {
+          "id": "raj-5d-budget",
+          "title": "Golden Triangle Explorer",
+          "duration": "5 Days / 4 Nights",
+          "durationDays": 5,
+          "type": "budget",
+          "price": "₹18,999",
+          "priceInt": 18999,
+          "groupSize": "2–12",
+          "image": "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=600",
+          "highlights": ["Jaipur Amber Fort & City Palace", "Jodhpur Mehrangarh Fort", "Pushkar Sacred Lake"],
+          "itinerary": [
+            {"day": 1, "title": "Arrive Jaipur", "description": "Airport pickup, check-in, evening at Hawa Mahal & Johari Bazaar."},
+            {"day": 2, "title": "Jaipur Exploration", "description": "Amber Fort elephant ride, City Palace, Jantar Mantar, local cuisine dinner."},
+            {"day": 3, "title": "Jaipur → Pushkar", "description": "Drive 150 km to Pushkar. Visit Brahma Temple, Pushkar Lake, camel safari at sunset."},
+            {"day": 4, "title": "Pushkar → Jodhpur", "description": "Drive 190 km. Mehrangarh Fort tour, blue city walk, local dal baati dinner."},
+            {"day": 5, "title": "Jodhpur Departure", "description": "Morning Umaid Bhawan Palace visit, transfer to airport/station."}
+          ],
+          "inclusions": ["4 nights hotel (3-star)", "Daily breakfast", "AC road transport", "Sightseeing as per itinerary", "Expert travel guide"],
+          "exclusions": ["Flights / Train tickets", "Lunches & dinners", "Monument entry fees", "Personal expenses", "Travel insurance"]
+        },
+        {
+          "id": "raj-8d-mid",
+          "title": "Royal Rajasthan Circuit",
+          "duration": "8 Days / 7 Nights",
+          "durationDays": 8,
+          "type": "mid",
+          "price": "₹34,999",
+          "priceInt": 34999,
+          "groupSize": "2–10",
+          "image": "https://images.unsplash.com/photo-1599661046289-e31897b8e4e5?w=600",
+          "highlights": ["Jaipur", "Jodhpur", "Jaisalmer Desert Camp", "Udaipur Lake Pichola"],
+          "itinerary": [
+            {"day": 1, "title": "Arrive Jaipur", "description": "Welcome dinner, overnight at 4-star heritage hotel."},
+            {"day": 2, "title": "Jaipur — Pink City", "description": "Amber Fort, Jal Mahal, City Palace museum, Nahargarh Fort sunset view."},
+            {"day": 3, "title": "Jaipur → Jodhpur", "description": "Drive via Ajmer. Dargah Sharif visit. Jodhpur city walk at dusk."},
+            {"day": 4, "title": "Jodhpur — Blue City", "description": "Mehrangarh Fort, Jaswant Thada, old city lanes, step-well (Toorji Ka Jhalra)."},
+            {"day": 5, "title": "Jodhpur → Jaisalmer", "description": "Drive through Thar Desert. Sam Sand Dunes arrival. Camel safari + cultural dinner at desert camp."},
+            {"day": 6, "title": "Jaisalmer — The Golden Fort", "description": "Jaisalmer Fort, Patwon Ki Haveli, Gadisar Lake boat ride. Overnight camp."},
+            {"day": 7, "title": "Jaisalmer → Udaipur", "description": "Fly to Udaipur (flight extra). Lake Pichola sunset boat ride. City Palace visit."},
+            {"day": 8, "title": "Udaipur Departure", "description": "Morning at leisure, Saheliyon Ki Bari, transfer to airport."}
+          ],
+          "inclusions": ["7 nights hotel (mix 4-star & luxury desert camp)", "Daily breakfast + 3 dinners", "AC transport throughout", "Expert guide", "Camel safari", "Jaisalmer desert cultural show"],
+          "exclusions": ["Airfare", "Jaisalmer–Udaipur flight", "Lunches", "Monument entry fees", "Personal expenses"]
+        },
+        {
+          "id": "raj-10d-luxury",
+          "title": "Maharaja's Rajasthan",
+          "duration": "10 Days / 9 Nights",
+          "durationDays": 10,
+          "type": "luxury",
+          "price": "₹89,999",
+          "priceInt": 89999,
+          "groupSize": "2–6",
+          "image": "https://images.unsplash.com/photo-1585320806297-9794b3e4aaae?w=600",
+          "highlights": ["Palace Hotel stays", "Private guided tours", "Hot air balloon Jaipur", "Luxury desert camp"],
+          "itinerary": [
+            {"day": 1, "title": "Arrive Delhi → Jaipur", "description": "Private airport transfer. Check in at Rambagh Palace or Taj Jai Mahal. Welcome cocktail."},
+            {"day": 2, "title": "Jaipur — Royally", "description": "Private Amber Fort tour with elephant ride. Exclusive City Palace curator's tour. Hot air balloon at sunrise."},
+            {"day": 3, "title": "Jaipur at leisure", "description": "Cooking class at a heritage haveli. Gem market private tour with jeweler. Nahargarh sundowner."},
+            {"day": 4, "title": "Jaipur → Jodhpur", "description": "Chauffeured drive. Check-in Umaid Bhawan Palace (Taj wing). Sundowner at the Palace."},
+            {"day": 5, "title": "Jodhpur — Private", "description": "Private fort access before opening hours. Blue city walk with local historian. Rooftop private dinner."},
+            {"day": 6, "title": "Jodhpur → Jaisalmer", "description": "Private jeep drive through Thar. Arrive luxury desert camp (Suryagarh or equivalent). Dune sundowner."},
+            {"day": 7, "title": "Jaisalmer Golden City", "description": "Private fort walk with art historian. Exquisite haveli viewing. Sunset camel ride."},
+            {"day": 8, "title": "Jaisalmer → Udaipur", "description": "Private flight (included). Check-in Taj Lake Palace or Raas Devigarh. Evening boat on Lake Pichola."},
+            {"day": 9, "title": "Udaipur — City of Lakes", "description": "City Palace private guided tour. Vintage car ride. Farewell gala dinner overlooking Lake Pichola."},
+            {"day": 10, "title": "Udaipur Departure", "description": "Breakfast at leisure. Chauffeured airport transfer with departure gift hamper."}
+          ],
+          "inclusions": ["9 nights luxury palace/heritage hotels", "All meals (breakfast, lunch, dinner)", "Private guide throughout", "All internal transfers incl. Jaisalmer–Udaipur flight", "Hot air balloon", "Vintage car ride", "All monument entries", "Departure gift"],
+          "exclusions": ["International flights", "Visa fees", "Spa treatments", "Personal shopping", "Travel insurance"]
+        }
+      ]
+    },
+    "kerala": {
+      "id": "kerala",
+      "name": "Kerala",
+      "type": "domestic",
+      "tagline": "God's Own Country — Backwaters, Beaches & Spice",
+      "description": "Kerala is a tropical paradise on India's southwestern coast. Drift through the legendary backwaters on a houseboat, trek through misty tea gardens in Munnar, unwind on serene Kovalam beaches, and experience authentic Ayurvedic wellness retreats.",
+      "heroImage": "../images/keralaactive.jpg",
+      "gallery": [
+        "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800",
+        "https://images.unsplash.com/photo-1545566706-5609f38e7e50?w=800",
+        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
+        "https://images.unsplash.com/photo-1626169769-cc98ca5a0d80?w=800",
+        "https://images.unsplash.com/photo-1580982185614-5a56e50bbd1b?w=800",
+        "https://images.unsplash.com/photo-1609748341796-5b84d0a28d11?w=800"
+      ],
+      "highlights": ["Alleppey Backwaters", "Munnar", "Kovalam Beach", "Kochi Fort", "Thekkady Wildlife", "Wayanad"],
+      "bestTime": "September – March",
+      "seo": {
+        "title": "Kerala Tour Packages | Tourishq Travel Solutions",
+        "description": "Explore God's Own Country with Tourishq — backwater houseboats, Munnar tea gardens & Kovalam beaches. Packages starting from ₹22,999."
+      },
+      "packages": [
+        {
+          "id": "ker-6d-budget",
+          "title": "Kerala Backwater Getaway",
+          "duration": "6 Days / 5 Nights",
+          "durationDays": 6,
+          "type": "budget",
+          "price": "₹22,999",
+          "priceInt": 22999,
+          "groupSize": "2–8",
+          "image": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=600",
+          "highlights": ["Alleppey houseboat stay", "Munnar tea gardens", "Kovalam beach"],
+          "itinerary": [
+            {"day": 1, "title": "Arrive Kochi", "description": "Fort Kochi walking tour, Chinese fishing nets, Jewish Synagogue, overnight Kochi."},
+            {"day": 2, "title": "Kochi → Munnar", "description": "Drive 120 km through spice gardens. Tea museum visit. Evening in Munnar town."},
+            {"day": 3, "title": "Munnar — Tea Country", "description": "Eravikulam National Park, Top Station viewpoint, local tea tasting."},
+            {"day": 4, "title": "Munnar → Alleppey", "description": "Drive to Alleppey. Board AC houseboat for overnight backwater cruise. Traditional Kerala meals."},
+            {"day": 5, "title": "Alleppey → Kovalam", "description": "Morning disembark. Drive to Kovalam. Beach relaxation, sunset at Lighthouse Beach."},
+            {"day": 6, "title": "Kovalam → Trivandrum Departure", "description": "Morning Ayurvedic massage (30 min), transfer to Trivandrum airport."}
+          ],
+          "inclusions": ["5 nights accommodation (3-star + 1 night houseboat)", "Daily breakfast", "1 dinner on houseboat", "AC transport", "Kochi tour guide"],
+          "exclusions": ["Flights", "Lunches", "Eravikulam entry", "Personal expenses", "Travel insurance"]
+        },
+        {
+          "id": "ker-9d-luxury",
+          "title": "Kerala Luxury Wellness Escape",
+          "duration": "9 Days / 8 Nights",
+          "durationDays": 9,
+          "type": "luxury",
+          "price": "₹74,999",
+          "priceInt": 74999,
+          "groupSize": "2–4",
+          "image": "https://images.unsplash.com/photo-1545566706-5609f38e7e50?w=600",
+          "highlights": ["Luxury houseboat with chef", "Ayurvedic resort stay", "Private wildlife safari", "Beach villa"],
+          "itinerary": [
+            {"day": 1, "title": "Arrive Kochi", "description": "Luxury airport transfer. Sunset harbour cruise. Heritage boutique hotel in Fort Kochi."},
+            {"day": 2, "title": "Kochi → Wayanad", "description": "Scenic drive through ghats. Check-in luxury tree-house resort. Evening nature walk."},
+            {"day": 3, "title": "Wayanad Wildlife", "description": "Private jeep safari at Wayanad Wildlife Sanctuary. Bamboo rafting. Tribal village visit."},
+            {"day": 4, "title": "Wayanad → Munnar", "description": "Drive through Ooty ghats. Check-in 5-star resort with valley views. Sunset tea garden walk."},
+            {"day": 5, "title": "Munnar Luxury Day", "description": "Private tea estate tour with plucking experience. Spa day at resort. Chef's dinner."},
+            {"day": 6, "title": "Munnar → Alleppey", "description": "Arrive at premium luxury houseboat with private chef. Sunset canapes on deck."},
+            {"day": 7, "title": "Alleppey Backwaters", "description": "Full day backwater cruise with village stops. Cooking demonstration. Candlelit dinner on water."},
+            {"day": 8, "title": "Alleppey → Kovalam", "description": "Check-in Leela Kovalam or similar beach resort. Ayurvedic Panchakarma session (2 hrs)."},
+            {"day": 9, "title": "Kovalam → Trivandrum Departure", "description": "Breakfast at leisure. Transfer with farewell gift hamper."}
+          ],
+          "inclusions": ["8 nights (luxury resorts + premium houseboat)", "All meals", "Private transfers", "Ayurvedic sessions", "Wildlife safari", "All activities", "Expert naturalist guide", "Departure hamper"],
+          "exclusions": ["Flights", "Visa", "Personal shopping", "Travel insurance"]
+        }
+      ]
+    },
+    "himachal": {
+      "id": "himachal",
+      "name": "Himachal Pradesh",
+      "type": "domestic",
+      "tagline": "Snow-Capped Peaks, Apple Orchards & Alpine Calm",
+      "description": "Himachal Pradesh is the Himalayan playground of northern India. From the colonial charm of Shimla to the bohemian valleys of Manali and Kasol, from paragliding in Bir Billing to the ancient temples of Spiti — Himachal is an adventure and a meditation rolled into one.",
+      "heroImage": "../images/himachalactive.jpg",
+      "gallery": [
+        "https://images.unsplash.com/photo-1597773150796-e5c14ebecbf5?w=800",
+        "https://images.unsplash.com/photo-1626168769-cc98ca5a0d80?w=800",
+        "https://images.unsplash.com/photo-1619446618137-96f7cd5e3e41?w=800",
+        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
+        "https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=800",
+        "https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=800"
+      ],
+      "highlights": ["Shimla", "Manali", "Kasol", "Bir Billing", "Dharamsala", "Solang Valley"],
+      "bestTime": "March – June & September – November",
+      "seo": {
+        "title": "Himachal Pradesh Tour Packages | Tourishq",
+        "description": "Discover Himachal Pradesh with Tourishq — Shimla, Manali & Kasol packages with adventure activities. Starting from ₹19,999."
+      },
+      "packages": [
+        {
+          "id": "him-7d-budget",
+          "title": "Shimla–Manali Adventure",
+          "duration": "7 Days / 6 Nights",
+          "durationDays": 7,
+          "type": "budget",
+          "price": "₹19,999",
+          "priceInt": 19999,
+          "groupSize": "2–15",
+          "image": "https://images.unsplash.com/photo-1597773150796-e5c14ebecbf5?w=600",
+          "highlights": ["Shimla Mall Road & Christ Church", "Rohtang Pass (snow)", "Solang Valley adventure"],
+          "itinerary": [
+            {"day": 1, "title": "Delhi → Shimla", "description": "Overnight bus or drive. Check-in hotel."},
+            {"day": 2, "title": "Shimla Exploration", "description": "Mall Road, Christ Church, Jakhu Temple, Scandal Point. Evening stroll."},
+            {"day": 3, "title": "Shimla → Manali", "description": "Scenic 7-hour drive via Kullu Valley. River Beas views. Check-in Manali."},
+            {"day": 4, "title": "Manali Local", "description": "Hadimba Temple, Van Vihar, Old Manali market. River-side bonfire evening."},
+            {"day": 5, "title": "Solang Valley / Rohtang", "description": "Snow activities: skiing, snowmobiling, zorbing. Rohtang Pass (subject to permit)."},
+            {"day": 6, "title": "Manali Leisure", "description": "Vashisht hot springs, river rafting on Beas (optional), shopping in Old Manali."},
+            {"day": 7, "title": "Manali → Delhi", "description": "Overnight Volvo bus return to Delhi."}
+          ],
+          "inclusions": ["6 nights hotel (3-star)", "Daily breakfast", "Volvo AC bus Manali–Delhi", "Solang activities (basic)"],
+          "exclusions": ["Delhi–Shimla travel", "Lunches & dinners", "Rohtang permit", "Personal expenses"]
+        },
+        {
+          "id": "him-10d-mid",
+          "title": "Himachal Complete Circuit",
+          "duration": "10 Days / 9 Nights",
+          "durationDays": 10,
+          "type": "mid",
+          "price": "₹38,999",
+          "priceInt": 38999,
+          "groupSize": "2–10",
+          "image": "https://images.unsplash.com/photo-1619446618137-96f7cd5e3e41?w=600",
+          "highlights": ["Shimla", "Kasol & Kheerganga trek", "Manali", "Bir Billing paragliding", "Dharamsala & McLeodGanj"],
+          "itinerary": [
+            {"day": 1, "title": "Arrive Chandigarh → Shimla", "description": "Toy train from Kalka to Shimla (heritage ride). Check-in."},
+            {"day": 2, "title": "Shimla", "description": "Viceregal Lodge, Kufri day trip (snow & yaks), Himalayan Nature Park."},
+            {"day": 3, "title": "Shimla → Kasol", "description": "Drive via Rampur. Arrive Kasol — the 'Mini Israel' of India. Evening by Parvati River."},
+            {"day": 4, "title": "Kheerganga Trek", "description": "Full-day trek to Kheerganga hot springs (12 km). Overnight at Kasol."},
+            {"day": 5, "title": "Kasol → Manali", "description": "Scenic drive through Kullu. Check-in heritage Manali hotel."},
+            {"day": 6, "title": "Manali Adventure", "description": "White-water rafting on Beas, Solang Valley snow activities, zip-lining."},
+            {"day": 7, "title": "Manali → Bir", "description": "Drive 75 km to Bir Billing (world-class paragliding site). Check-in."},
+            {"day": 8, "title": "Bir Billing Paragliding", "description": "Tandem paragliding from Billing (2,400 m). Tibetan colony visit."},
+            {"day": 9, "title": "Bir → Dharamsala", "description": "Drive 60 km. McLeodGanj, Namgyal Monastery, Dalai Lama Temple."},
+            {"day": 10, "title": "Dharamsala → Delhi Departure", "description": "Morning yoga class, afternoon transfer to Delhi."}
+          ],
+          "inclusions": ["9 nights (3–4 star mix)", "Daily breakfast", "Kalka–Shimla toy train", "Paragliding (tandem)", "Rafting", "AC transport throughout"],
+          "exclusions": ["Flights", "Lunches & dinners", "Personal expenses", "Travel insurance"]
+        }
+      ]
+    },
+    "ladakh": {
+      "id": "ladakh",
+      "name": "Ladakh",
+      "type": "domestic",
+      "tagline": "Land of High Passes — The Last Frontier",
+      "description": "Ladakh is the roof of the world — a high-altitude desert landscape of monasteries perched on clifftops, turquoise lakes that mirror the sky, and mountain passes that take your breath away literally and figuratively. An experience unlike any other on Earth.",
+      "heroImage": "../images/ladakhactive.jpg",
+      "gallery": [
+        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
+        "https://images.unsplash.com/photo-1588286492390-55d5a84f1d0f?w=800",
+        "https://images.unsplash.com/photo-1580777361964-27e9cdd2f838?w=800",
+        "https://images.unsplash.com/photo-1572632012285-4e56a9e48e75?w=800",
+        "https://images.unsplash.com/photo-1531880329-b78ced68e57e?w=800",
+        "https://images.unsplash.com/photo-1587474260584-136574528ed5?w=800"
+      ],
+      "highlights": ["Pangong Lake", "Nubra Valley", "Khardung La Pass", "Leh Palace", "Hemis Monastery", "Magnetic Hill"],
+      "bestTime": "June – September",
+      "seo": {
+        "title": "Ladakh Tour Packages | Tourishq Travel Solutions",
+        "description": "Explore the roof of the world with Tourishq Ladakh packages — Pangong Lake, Nubra Valley & Khardung La. Starting from ₹27,999."
+      },
+      "packages": [
+        {
+          "id": "lad-7d-budget",
+          "title": "Leh–Ladakh Explorer",
+          "duration": "7 Days / 6 Nights",
+          "durationDays": 7,
+          "type": "budget",
+          "price": "₹27,999",
+          "priceInt": 27999,
+          "groupSize": "2–10",
+          "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600",
+          "highlights": ["Pangong Lake overnight", "Nubra Valley camel safari", "Khardung La world's highest motorable pass"],
+          "itinerary": [
+            {"day": 1, "title": "Arrive Leh (3,500 m)", "description": "Rest day for acclimatization. Light walk around Leh market. No strenuous activity."},
+            {"day": 2, "title": "Leh Local", "description": "Leh Palace, Shanti Stupa, Hemis Monastery, Thiksey Monastery. Oxygen bar visit if needed."},
+            {"day": 3, "title": "Leh → Nubra Valley", "description": "Drive over Khardung La (5,359 m). Diskit Monastery. Evening Bactrian camel safari on Hunder sand dunes."},
+            {"day": 4, "title": "Nubra → Pangong Lake", "description": "Drive via Shyok Valley. Arrive at the iconic Pangong Tso. Watch sunset on the lake. Overnight camp."},
+            {"day": 5, "title": "Pangong Lake Morning", "description": "Sunrise at the lake (blue, green, purple shifting colors). Drive back to Leh via Chang La (5,360 m)."},
+            {"day": 6, "title": "Leh Leisure", "description": "Local market shopping for pashmina & turquoise. Optional jeep safari or Markha valley trek preview."},
+            {"day": 7, "title": "Leh Departure", "description": "Early morning transfer to Leh airport."}
+          ],
+          "inclusions": ["6 nights (hotel + Nubra camp + Pangong camp)", "Daily breakfast", "Innova/Ertiga transport", "Camel safari", "Inner Line Permit"],
+          "exclusions": ["Flights to/from Leh", "Lunches & dinners", "Personal expenses", "Travel insurance"]
+        }
+      ]
+    },
+    "kashmir": {
+      "id": "kashmir",
+      "name": "Kashmir",
+      "type": "domestic",
+      "tagline": "Heaven on Earth — Dal Lake, Snowfields & Saffron Valleys",
+      "description": "Kashmir earns its title 'Heaven on Earth' with the iconic Dal Lake houseboats, the flower-carpeted Gulmarg meadows, the apple orchards of Pahalgam, and the pristine Sonamarg glacier valley. A destination of breathtaking natural beauty and warm Kashmiri hospitality.",
+      "heroImage": "../images/kashmiractive.jpg",
+      "gallery": [
+        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800",
+        "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=800",
+        "https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=800",
+        "https://images.unsplash.com/photo-1564507592333-c60657eea523?w=800",
+        "https://images.unsplash.com/photo-1542735025-7063ef7cb41c?w=800",
+        "https://images.unsplash.com/photo-1547392743-1b0c56748ace?w=800"
+      ],
+      "highlights": ["Dal Lake Shikara ride", "Gulmarg Gondola", "Pahalgam Valley", "Sonamarg Glacier", "Srinagar Old City", "Mughal Gardens"],
+      "bestTime": "March – June & October – November",
+      "seo": {
+        "title": "Kashmir Tour Packages | Tourishq Travel Solutions",
+        "description": "Experience Heaven on Earth with Tourishq Kashmir packages — Dal Lake houseboats, Gulmarg snow & Pahalgam valleys. Starting from ₹24,999."
+      },
+      "packages": [
+        {
+          "id": "kas-6d-budget",
+          "title": "Kashmir Valley Escape",
+          "duration": "6 Days / 5 Nights",
+          "durationDays": 6,
+          "type": "budget",
+          "price": "₹24,999",
+          "priceInt": 24999,
+          "groupSize": "2–10",
+          "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600",
+          "highlights": ["Dal Lake houseboat stay", "Gulmarg Gondola (Asia's highest cable car)", "Pahalgam Lidder River"],
+          "itinerary": [
+            {"day": 1, "title": "Arrive Srinagar", "description": "Shikara ride on Dal Lake, Mughal Gardens (Shalimar, Nishat). Check-in deluxe houseboat."},
+            {"day": 2, "title": "Gulmarg Day Trip", "description": "Drive 60 km to Gulmarg meadow. Gondola Phase 1 & 2 to Apharwat Peak. Snow activities."},
+            {"day": 3, "title": "Pahalgam", "description": "Drive through Awantipora ruins. Pahalgam valley, Betaab Valley, Chandanwari. Lidder River bank picnic."},
+            {"day": 4, "title": "Sonamarg Day Trip", "description": "Drive 80 km to Sonamarg. Thajiwas Glacier pony ride. Alpine meadow picnic."},
+            {"day": 5, "title": "Srinagar City", "description": "Old city Jama Masjid, Shah-e-Hamdan shrine, handicraft market (papier-mâché, carpets, pashmina)."},
+            {"day": 6, "title": "Srinagar Departure", "description": "Morning Shikara sunrise ride. Transfer to airport."}
+          ],
+          "inclusions": ["5 nights (houseboat + hotels)", "Daily breakfast", "Houseboat shikara", "AC cab throughout", "Gulmarg Gondola Phase 1"],
+          "exclusions": ["Flights", "Gondola Phase 2", "Pony rides", "Lunches & dinners", "Personal expenses"]
+        }
+      ]
+    },
+    "uttarakhand": {
+      "id": "uttarakhand",
+      "name": "Uttarakhand",
+      "type": "domestic",
+      "tagline": "Dev Bhoomi — Yoga, Rivers & Himalayan Trails",
+      "description": "Uttarakhand is India's spiritual heartland — the land of the gods. From the yoga capital of Rishikesh with its white-water rapids to the pilgrim trails of Char Dham, from the misty hill stations of Mussoorie and Nainital to the wildlife riches of Jim Corbett National Park.",
+      "heroImage": "../images/uttarakhandactive.jpg",
+      "gallery": [
+        "https://images.unsplash.com/photo-1548013146-72479768bada?w=800",
+        "https://images.unsplash.com/photo-1584507929463-f14c4c5e52ac?w=800",
+        "https://images.unsplash.com/photo-1605649487212-47bdab064df7?w=800",
+        "https://images.unsplash.com/photo-1559234960-b57625a5b6c5?w=800",
+        "https://images.unsplash.com/photo-1597429408450-e4b6dbac4bb9?w=800",
+        "https://images.unsplash.com/photo-1587474260584-136574528ed5?w=800"
+      ],
+      "highlights": ["Rishikesh Rafting", "Nainital Lake", "Jim Corbett Safari", "Mussoorie", "Valley of Flowers", "Haridwar Ganga Aarti"],
+      "bestTime": "March – June & September – November",
+      "seo": {
+        "title": "Uttarakhand Tour Packages | Tourishq Travel Solutions",
+        "description": "Explore Dev Bhoomi with Tourishq — Rishikesh, Nainital, Mussoorie & Jim Corbett packages. Starting from ₹16,999."
+      },
+      "packages": [
+        {
+          "id": "utt-5d-budget",
+          "title": "Rishikesh–Haridwar–Nainital",
+          "duration": "5 Days / 4 Nights",
+          "durationDays": 5,
+          "type": "budget",
+          "price": "₹16,999",
+          "priceInt": 16999,
+          "groupSize": "2–12",
+          "image": "https://images.unsplash.com/photo-1548013146-72479768bada?w=600",
+          "highlights": ["Ganga Aarti Haridwar", "White-water rafting Rishikesh", "Nainital Naini Lake"],
+          "itinerary": [
+            {"day": 1, "title": "Arrive Haridwar", "description": "Har Ki Pauri Ganga Aarti at sunset. Check-in hotel."},
+            {"day": 2, "title": "Rishikesh", "description": "Laxman Jhula, Ram Jhula, Beatles Ashram. Afternoon white-water rafting on Ganga."},
+            {"day": 3, "title": "Rishikesh → Nainital", "description": "Drive 290 km through Kumaon hills. Arrive Nainital. Mall Road walk."},
+            {"day": 4, "title": "Nainital", "description": "Naini Lake boat ride, Snow View Point ropeway, Naina Devi Temple, Zoo."},
+            {"day": 5, "title": "Nainital → Delhi", "description": "Morning Eco Cave Gardens, drive back to Delhi."}
+          ],
+          "inclusions": ["4 nights hotel", "Daily breakfast", "AC cab", "Rafting (14 km stretch)", "Aarti viewing"],
+          "exclusions": ["Flights/trains", "Lunches & dinners", "Ropeway", "Personal expenses"]
+        }
+      ]
+    },
+    "northeast": {
+      "id": "northeast",
+      "name": "North-East India",
+      "type": "domestic",
+      "tagline": "India's Hidden Paradise — Waterfalls, Tribes & Living Root Bridges",
+      "description": "The seven sister states of Northeast India are India's best-kept secret. Meghalaya's living root bridges and cloud-kissed villages, Assam's one-horned rhinos and tea gardens, Arunachal's Buddhist monasteries, and Sikkim's flower valleys — this region is extraordinary in every way.",
+      "heroImage": "../images/northeastactive.jpg",
+      "gallery": [
+        "https://images.unsplash.com/photo-1578632292335-df3abbb0d586?w=800",
+        "https://images.unsplash.com/photo-1609748341796-5b84d0a28d11?w=800",
+        "https://images.unsplash.com/photo-1584507929463-f14c4c5e52ac?w=800",
+        "https://images.unsplash.com/photo-1531880329-b78ced68e57e?w=800",
+        "https://images.unsplash.com/photo-1597429408450-e4b6dbac4bb9?w=800",
+        "https://images.unsplash.com/photo-1505562539891-cd4a84e3dc52?w=800"
+      ],
+      "highlights": ["Meghalaya Living Root Bridges", "Kaziranga Rhino Safari", "Ziro Valley Arunachal", "Gangtok Sikkim", "Cherrapunji Waterfalls", "Tawang Monastery"],
+      "bestTime": "October – April (avoid monsoon)",
+      "seo": {
+        "title": "North-East India Tour Packages | Tourishq Travel Solutions",
+        "description": "Explore India's hidden paradise with Tourishq — Meghalaya, Assam, Sikkim & Arunachal packages. Starting from ₹28,999."
+      },
+      "packages": [
+        {
+          "id": "ne-7d-mid",
+          "title": "Meghalaya & Assam Discovery",
+          "duration": "7 Days / 6 Nights",
+          "durationDays": 7,
+          "type": "mid",
+          "price": "₹28,999",
+          "priceInt": 28999,
+          "groupSize": "2–10",
+          "image": "https://images.unsplash.com/photo-1578632292335-df3abbb0d586?w=600",
+          "highlights": ["Living root bridges Nongriat", "Kaziranga jeep safari (rhino)", "Shillong Peak", "Cherrapunji double-decker bridge"],
+          "itinerary": [
+            {"day": 1, "title": "Arrive Guwahati", "description": "Kamakhya Temple, Brahmaputra river cruise at sunset."},
+            {"day": 2, "title": "Kaziranga", "description": "Morning jeep safari (one-horned rhino, elephant, wild buffalo). Afternoon elephant back safari."},
+            {"day": 3, "title": "Kaziranga → Shillong", "description": "Drive to Scotland of the East. Ward's Lake, Police Bazaar, Don Bosco Museum."},
+            {"day": 4, "title": "Cherrapunji", "description": "Nohkalikai Waterfall (India's highest), Mawsmai Caves, Eco Park. Day trip from Shillong."},
+            {"day": 5, "title": "Nongriat Trek", "description": "Full day trek to double-decker living root bridge (6 km, 3,500 steps). Most unique sight in India."},
+            {"day": 6, "title": "Dawki & Mawlynnong", "description": "Dawki crystal-clear Umngot River boat ride. Mawlynnong (Asia's cleanest village). Living root bridge."},
+            {"day": 7, "title": "Shillong → Guwahati → Departure", "description": "Drive to Guwahati airport. Departure."}
+          ],
+          "inclusions": ["6 nights hotel (3-4 star)", "Daily breakfast", "2 Kaziranga safaris", "AC SUV throughout", "Trek guide for Nongriat"],
+          "exclusions": ["Flights", "Lunches & dinners", "Personal expenses", "Travel insurance"]
+        }
+      ]
+    },
+    "spiti": {
+      "id": "spiti",
+      "name": "Spiti Valley",
+      "type": "domestic",
+      "tagline": "The Middle Land — Buddhist Monasteries Above the Clouds",
+      "description": "Spiti is a cold desert mountain valley in the Himalayas, cut off from the world for months each year. Ancient Buddhist monasteries cling to cliffsides at 4,000+ meters. The landscape is stark, lunar, and profoundly beautiful. This is for the traveler who seeks the road less traveled.",
+      "heroImage": "../images/spitiactive.jpg",
+      "gallery": [
+        "https://images.unsplash.com/photo-1564507592333-c60657eea523?w=800",
+        "https://images.unsplash.com/photo-1606298246647-0f83e1849e53?w=800",
+        "https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=800",
+        "https://images.unsplash.com/photo-1531880329-b78ced68e57e?w=800",
+        "https://images.unsplash.com/photo-1505562539891-cd4a84e3dc52?w=800",
+        "https://images.unsplash.com/photo-1588286492390-55d5a84f1d0f?w=800"
+      ],
+      "highlights": ["Key Monastery", "Chandratal Lake", "Kaza Town", "Kibber Village", "Pin Valley", "Kunzum Pass"],
+      "bestTime": "June – October",
+      "seo": {
+        "title": "Spiti Valley Tour Packages | Tourishq Travel Solutions",
+        "description": "Explore the remote Spiti Valley with Tourishq — Key Monastery, Chandratal Lake & high-altitude desert. Starting from ₹24,999."
+      },
+      "packages": [
+        {
+          "id": "spi-8d-mid",
+          "title": "Spiti Expedition",
+          "duration": "8 Days / 7 Nights",
+          "durationDays": 8,
+          "type": "mid",
+          "price": "₹24,999",
+          "priceInt": 24999,
+          "groupSize": "2–8",
+          "image": "https://images.unsplash.com/photo-1564507592333-c60657eea523?w=600",
+          "highlights": ["Key Monastery", "Chandratal camping", "Kibber highest motorable village", "Kunzum Pass"],
+          "itinerary": [
+            {"day": 1, "title": "Arrive Manali", "description": "Acclimatization. Local walk, Old Manali. Overnight hotel."},
+            {"day": 2, "title": "Manali → Kaza via Kunzum Pass", "description": "Drive over Rohtang & Kunzum Pass (4,550 m). Chandratal Lake detour. Arrive Kaza."},
+            {"day": 3, "title": "Kaza Exploration", "description": "Key Monastery (oldest and highest monastery). Kibber village. Ki village fossil park."},
+            {"day": 4, "title": "Langza & Komic", "description": "Langza Buddha statue (4,400 m). Komic — world's highest motorable village. Hikkim post office."},
+            {"day": 5, "title": "Pin Valley", "description": "Pin Valley National Park — snow leopard habitat. Mud village, Sagnam. River crossing."},
+            {"day": 6, "title": "Dhankar & Tabo", "description": "Dhankar Monastery on cliff. Dhankar Lake trek (2 hrs). Tabo Monastery (1,000 years old)."},
+            {"day": 7, "title": "Tabo → Nako → Shimla", "description": "Drive via Nako Lake (Tibet border views), Kalpa (Kinner Kailash views). Overnight Shimla."},
+            {"day": 8, "title": "Shimla Departure", "description": "Transfer to Chandigarh airport or Delhi (overnight bus)."}
+          ],
+          "inclusions": ["7 nights (homestays + guesthouses + 1 camp)", "Daily breakfast & dinner", "4x4 vehicle (Innova Crysta)", "Monastery permit", "Guide"],
+          "exclusions": ["Flights", "Lunches", "Personal expenses", "Travel insurance"]
+        }
+      ]
+    },
+    "bali": {
+      "id": "bali",
+      "name": "Bali",
+      "type": "international",
+      "tagline": "Island of Gods — Rice Terraces, Temples & Tropical Bliss",
+      "description": "Bali is the crown jewel of Indonesia — a magical island where ancient Hindu culture meets stunning natural beauty. Sunrise over volcanic Mount Batur, emerald rice terraces in Ubud, dramatic sea temples at Tanah Lot, and the legendary surf of Seminyak all await.",
+      "heroImage": "../images/baliactive.jpg",
+      "gallery": [
+        "https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?w=800",
+        "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=800",
+        "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=800",
+        "https://images.unsplash.com/photo-1562974993-52a29af929f1?w=800",
+        "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800",
+        "https://images.unsplash.com/photo-1573790387438-4da905039392?w=800"
+      ],
+      "highlights": ["Ubud Rice Terraces", "Tanah Lot Temple", "Mount Batur Sunrise Trek", "Seminyak Beach", "Nusa Penida Kelingking", "Tegallalang"],
+      "bestTime": "April – October (dry season)",
+      "seo": {
+        "title": "Bali Tour Packages from India | Tourishq Travel Solutions",
+        "description": "Bali holiday packages for Indian travelers — Ubud, Seminyak & Nusa Penida. Visa on arrival. Starting from ₹39,999 including flights."
+      },
+      "packages": [
+        {
+          "id": "bal-6d-budget",
+          "title": "Bali Bliss Budget",
+          "duration": "6 Days / 5 Nights",
+          "durationDays": 6,
+          "type": "budget",
+          "price": "₹39,999",
+          "priceInt": 39999,
+          "groupSize": "2–10",
+          "image": "https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?w=600",
+          "highlights": ["Ubud monkey forest & rice terraces", "Tanah Lot sunset", "Seminyak beach"],
+          "itinerary": [
+            {"day": 1, "title": "Arrive Denpasar", "description": "Airport transfer to Ubud hotel. Evening Kecak fire dance show."},
+            {"day": 2, "title": "Ubud", "description": "Tegallalang rice terraces, Sacred Monkey Forest, Ubud Palace & Market, local cooking class."},
+            {"day": 3, "title": "Mount Batur", "description": "Pre-dawn hike to Batur volcano summit (1,717 m). Watch sunrise above the clouds. Back for breakfast."},
+            {"day": 4, "title": "Tanah Lot & Seminyak", "description": "Tanah Lot sea temple at sunset. Check-in Seminyak. Beach club evening."},
+            {"day": 5, "title": "Nusa Penida Day Trip", "description": "Speedboat to Nusa Penida. Kelingking Beach (T-Rex cliff), Angel's Billabong, Broken Beach."},
+            {"day": 6, "title": "Seminyak → Departure", "description": "Morning beach walk, shopping on Seminyak Strip. Transfer to airport."}
+          ],
+          "inclusions": ["5 nights hotel (3-4 star)", "Daily breakfast", "All transfers", "Batur trek with guide", "Kecak dance tickets", "Nusa Penida speedboat"],
+          "exclusions": ["International flights", "Visa on arrival (USD 35)", "Lunches & dinners", "Personal expenses", "Travel insurance"]
+        },
+        {
+          "id": "bal-8d-luxury",
+          "title": "Bali Luxury Retreat",
+          "duration": "8 Days / 7 Nights",
+          "durationDays": 8,
+          "type": "luxury",
+          "price": "₹1,09,999",
+          "priceInt": 109999,
+          "groupSize": "2–4",
+          "image": "https://images.unsplash.com/photo-1573790387438-4da905039392?w=600",
+          "highlights": ["Private pool villa", "Luxury spa", "Private cooking class with celebrity chef", "Nusa Lembongan diving"],
+          "itinerary": [
+            {"day": 1, "title": "Arrive Bali", "description": "Private airport transfer. Check-in luxury private pool villa in Ubud jungle. Welcome cocktail & spa."},
+            {"day": 2, "title": "Ubud Culture", "description": "Private guided Ubud walk. Exclusive temple blessing ceremony. Sunset at Campuhan Ridge."},
+            {"day": 3, "title": "Batur Sunrise + Spa", "description": "Private guided Batur sunrise trek. Return to villa. Full-day spa with Balinese Boreh treatment."},
+            {"day": 4, "title": "Cooking & Crafts", "description": "Private cooking masterclass with top Balinese chef. Silver smithing or woodcarving class. Sunset dinner."},
+            {"day": 5, "title": "Nusa Lembongan", "description": "Private speedboat to Nusa Lembongan. Scuba diving or snorkeling with manta rays. Cliff-top lunch."},
+            {"day": 6, "title": "Seminyak", "description": "Move to beach villa. COMO Shambhala or Potato Head Beach Club sunset. Romantic dinner on beach."},
+            {"day": 7, "title": "Seminyak Leisure", "description": "Spa morning. Private shopping tour with local stylist. Farewell dinner at world-class restaurant."},
+            {"day": 8, "title": "Departure", "description": "Private departure transfer with farewell gift."}
+          ],
+          "inclusions": ["7 nights (private pool villa + luxury beach villa)", "All meals", "Private guide & driver", "All activities", "Spa treatments (2 sessions)", "Diving (1 dive)", "Farewell gift"],
+          "exclusions": ["International flights", "Visa on arrival", "Personal shopping", "Travel insurance"]
+        }
+      ]
+    },
+    "thailand": {
+      "id": "thailand",
+      "name": "Thailand",
+      "type": "international",
+      "tagline": "The Land of Smiles — Temples, Islands & Street Food Bliss",
+      "description": "Thailand enchants every traveler — from the glittering temples of Bangkok to the turquoise waters of Phuket and Koh Samui, from the jungle mountains of Chiang Mai to the party islands of Koh Phangan. World-class hospitality, incredible food, and exceptional value.",
+      "heroImage": "../images/thailandactive.jpg",
+      "gallery": [
+        "https://images.unsplash.com/photo-1506665531195-3566af2b4dfa?w=800",
+        "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=800",
+        "https://images.unsplash.com/photo-1563492065599-3520f775eeed?w=800",
+        "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800",
+        "https://images.unsplash.com/photo-1562137369-1a1a0bc73ece?w=800",
+        "https://images.unsplash.com/photo-1549144511-f099e773c147?w=800"
+      ],
+      "highlights": ["Bangkok Grand Palace", "Chiang Mai Elephant Sanctuary", "Phuket Islands", "Phi Phi Islands", "Floating Markets", "Railay Beach"],
+      "bestTime": "November – April",
+      "seo": {
+        "title": "Thailand Tour Packages from India | Tourishq Travel Solutions",
+        "description": "Thailand holiday packages — Bangkok, Phuket & Chiang Mai. Visa on arrival for Indians. Starting from ₹34,999 with flights."
+      },
+      "packages": [
+        {
+          "id": "tha-7d-budget",
+          "title": "Bangkok–Phuket Classic",
+          "duration": "7 Days / 6 Nights",
+          "durationDays": 7,
+          "type": "budget",
+          "price": "₹34,999",
+          "priceInt": 34999,
+          "groupSize": "2–12",
+          "image": "https://images.unsplash.com/photo-1506665531195-3566af2b4dfa?w=600",
+          "highlights": ["Grand Palace Bangkok", "Phi Phi Islands speedboat", "Patong Beach", "Floating market"],
+          "itinerary": [
+            {"day": 1, "title": "Arrive Bangkok", "description": "Airport transfer. Evening Khao San Road & Night Market."},
+            {"day": 2, "title": "Bangkok Temples", "description": "Grand Palace & Wat Phra Kaew, Wat Pho (Reclining Buddha), Wat Arun by river taxi. Rooftop bar evening."},
+            {"day": 3, "title": "Bangkok Floating Market", "description": "Damnoen Saduak Floating Market. Afternoon fly to Phuket (domestic, extra)."},
+            {"day": 4, "title": "Phi Phi Island Speedboat", "description": "Full-day speedboat to Maya Bay, Phi Phi Don & Ley, snorkeling, Viking Cave."},
+            {"day": 5, "title": "James Bond Island", "description": "Phang Nga Bay kayaking. James Bond Island. Sea caves. Thai seafood lunch on island."},
+            {"day": 6, "title": "Phuket Beach Day", "description": "Patong Beach, Bangla Road evening, Tiger Kingdom optional."},
+            {"day": 7, "title": "Phuket Departure", "description": "Transfer to Phuket airport. Departure."}
+          ],
+          "inclusions": ["6 nights (3-star)", "Daily breakfast", "Phi Phi speedboat tour", "James Bond Island tour", "Bangkok city transfers"],
+          "exclusions": ["International flights", "Bangkok–Phuket domestic flight", "Visa on arrival (THB 2,000)", "Lunches & dinners", "Personal expenses"]
+        }
+      ]
+    },
+    "dubai": {
+      "id": "dubai",
+      "name": "Dubai",
+      "type": "international",
+      "tagline": "City of Gold — Desert Safaris, Skyscrapers & Ultra-Luxury",
+      "description": "Dubai is a city of superlatives — the world's tallest building, biggest mall, most luxurious hotels. But it's also a city of contrasts: ancient souks next to ultramodern skyscrapers, camel races alongside Formula 1 tracks, and desert dunes an hour from a ski slope.",
+      "heroImage": "../images/dubaiactive.jpg",
+      "gallery": [
+        "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800",
+        "https://images.unsplash.com/photo-1518684079-3c830dcef090?w=800",
+        "https://images.unsplash.com/photo-1547481887-a26e2cacb5db?w=800",
+        "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800",
+        "https://images.unsplash.com/photo-1580674684081-7617fbf3d745?w=800",
+        "https://images.unsplash.com/photo-1549897652-3bfe0fe2a4e9?w=800"
+      ],
+      "highlights": ["Burj Khalifa Observation Deck", "Desert Safari with BBQ", "Dubai Mall & Fountain Show", "Gold & Spice Souks", "Atlantis Aquaventure", "Palm Jumeirah"],
+      "bestTime": "November – March",
+      "seo": {
+        "title": "Dubai Tour Packages from India | Tourishq Travel Solutions",
+        "description": "Dubai holiday packages — Burj Khalifa, Desert Safari & luxury resorts. Visa on arrival for Indian passport. Starting from ₹44,999."
+      },
+      "packages": [
+        {
+          "id": "dub-5d-budget",
+          "title": "Dubai City & Desert",
+          "duration": "5 Days / 4 Nights",
+          "durationDays": 5,
+          "type": "budget",
+          "price": "₹44,999",
+          "priceInt": 44999,
+          "groupSize": "2–10",
+          "image": "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600",
+          "highlights": ["Burj Khalifa At The Top", "Desert Safari + BBQ dinner", "Dubai Frame", "Gold & Spice Souk"],
+          "itinerary": [
+            {"day": 1, "title": "Arrive Dubai", "description": "Hotel check-in. Evening Dubai Marina Walk & JBR Beach. Dinner at a waterfront restaurant."},
+            {"day": 2, "title": "Dubai City Tour", "description": "Burj Khalifa At The Top (124th floor), Dubai Mall fountain show, Dubai Frame, Dubai Museum."},
+            {"day": 3, "title": "Desert Safari", "description": "Afternoon: dune bashing in 4WD, camel ride, sandboarding, sunset photoshoot, BBQ dinner with belly dance."},
+            {"day": 4, "title": "Old Dubai & Shopping", "description": "Gold Souk, Spice Souk, Abra crossing Dubai Creek, Al Fahidi historical district. Free afternoon for shopping."},
+            {"day": 5, "title": "Departure", "description": "Optional Atlantis/Palm Jumeirah visit. Airport transfer."}
+          ],
+          "inclusions": ["4 nights hotel (4-star)", "Daily breakfast", "City tour", "Desert safari with BBQ", "All transfers"],
+          "exclusions": ["International flights", "UAE visa (approx ₹5,000)", "Lunches & dinners", "Atlantis entry", "Personal expenses"]
+        }
+      ]
+    },
+    "maldives": {
+      "id": "maldives",
+      "name": "Maldives",
+      "type": "international",
+      "tagline": "Ocean Villas & Coral Gardens — The Ultimate Island Escape",
+      "description": "The Maldives is paradise distilled to its purest form — 1,200 coral islands scattered across the Indian Ocean, each with white powder beaches, crystal lagoons, and the world's most diverse marine life. Overwater villas, bioluminescent bays, and absolute peace await.",
+      "heroImage": "../images/maldivesactive.jpg",
+      "gallery": [
+        "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800",
+        "https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=800",
+        "https://images.unsplash.com/photo-1533760881669-80db4d7b341d?w=800",
+        "https://images.unsplash.com/photo-1545454675-3531b543be5d?w=800",
+        "https://images.unsplash.com/photo-1519046904884-53103b34b206?w=800",
+        "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=800"
+      ],
+      "highlights": ["Overwater Bungalow", "Snorkeling with Manta Rays", "Bioluminescent Beach", "Private Island Dining", "Whale Shark Diving", "Dolphin Cruise"],
+      "bestTime": "November – April",
+      "seo": {
+        "title": "Maldives Tour Packages from India | Tourishq Travel Solutions",
+        "description": "Maldives honeymoon & holiday packages — overwater villas, snorkeling & private islands. Starting from ₹79,999 per couple."
+      },
+      "packages": [
+        {
+          "id": "mal-5d-mid",
+          "title": "Maldives Romantic Escape",
+          "duration": "5 Days / 4 Nights",
+          "durationDays": 5,
+          "type": "mid",
+          "price": "₹79,999",
+          "priceInt": 79999,
+          "groupSize": "2",
+          "image": "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=600",
+          "highlights": ["Beach villa stay", "Snorkeling & dolphin cruise", "Underwater restaurant dinner", "Island-hopping"],
+          "itinerary": [
+            {"day": 1, "title": "Arrive Malé → Resort Transfer", "description": "Speedboat or seaplane to resort. Welcome cocktail. Beach villa check-in. Sunset from your deck."},
+            {"day": 2, "title": "Ocean Day", "description": "Morning snorkeling with reef sharks, turtles, manta rays. Afternoon beach leisure. Sunset dolphin cruise."},
+            {"day": 3, "title": "Island Hopping", "description": "Local island visit (Maafushi), sandbank picnic, underwater sea walk, bioluminescent beach at night."},
+            {"day": 4, "title": "Water Sports & Spa", "description": "Jet ski, parasailing, kayaking. Afternoon couples massage at overwater spa. Underwater restaurant dinner."},
+            {"day": 5, "title": "Departure", "description": "Checkout. Transfer to Malé. Departure flight."}
+          ],
+          "inclusions": ["4 nights beach villa (full board)", "Speedboat transfers", "Snorkeling equipment", "Dolphin cruise", "Island-hopping tour", "Welcome drinks"],
+          "exclusions": ["International flights", "Maldives visa (free on arrival)", "Seaplane upgrade", "Underwater restaurant", "Personal expenses"]
+        }
+      ]
+    },
+    "europe": {
+      "id": "europe",
+      "name": "Europe",
+      "type": "international",
+      "tagline": "Art, History & Cafés — The Grand Continental Experience",
+      "description": "Europe is the world's greatest open-air museum — centuries of art, architecture, and culture packed into one continent. Walk the streets of Rome where gladiators once fought, cruise the canals of Venice, photograph the Eiffel Tower at night, and savor wine in Santorini as the sun sets over the Aegean.",
+      "heroImage": "../images/europeactive.jpg",
+      "gallery": [
+        "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=800",
+        "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=800",
+        "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800",
+        "https://images.unsplash.com/photo-1504512485720-7d83a16ee930?w=800",
+        "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800",
+        "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=800"
+      ],
+      "highlights": ["Paris Eiffel Tower", "Rome Colosseum", "Venice Canals", "Santorini Sunset", "Swiss Alps", "Barcelona Sagrada Familia"],
+      "bestTime": "April – June & September – October",
+      "seo": {
+        "title": "Europe Tour Packages from India | Tourishq Travel Solutions",
+        "description": "Europe holiday packages — Paris, Rome, Switzerland & Santorini. Schengen visa assistance included. Starting from ₹89,999."
+      },
+      "packages": [
+        {
+          "id": "eur-10d-mid",
+          "title": "Western Europe Classic",
+          "duration": "10 Days / 9 Nights",
+          "durationDays": 10,
+          "type": "mid",
+          "price": "₹89,999",
+          "priceInt": 89999,
+          "groupSize": "2–12",
+          "image": "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=600",
+          "highlights": ["Paris + London + Amsterdam + Brussels", "Eurostar train", "Canal cruise Amsterdam"],
+          "itinerary": [
+            {"day": 1, "title": "Arrive Paris", "description": "Hotel check-in. Evening Seine cruise + Eiffel Tower illuminated."},
+            {"day": 2, "title": "Paris", "description": "Louvre Museum, Notre-Dame (exterior), Montmartre, Sacré-Cœur. Dinner at Le Marais."},
+            {"day": 3, "title": "Paris → Brussels", "description": "Eurostar to Brussels. Grand Place, Manneken Pis, Belgian waffle & chocolate."},
+            {"day": 4, "title": "Brussels → Amsterdam", "description": "Train to Amsterdam. Canal cruise, Anne Frank House, Rijksmuseum."},
+            {"day": 5, "title": "Amsterdam", "description": "Vondelpark, Jordaan district, Heineken Experience, Van Gogh Museum."},
+            {"day": 6, "title": "Amsterdam → London", "description": "Eurostar via Brussels. Big Ben, Westminster, Tower Bridge, Thames cruise."},
+            {"day": 7, "title": "London", "description": "British Museum, Buckingham Palace, St. Paul's Cathedral, Borough Market."},
+            {"day": 8, "title": "London Day 3", "description": "Day trip to Windsor Castle or Stonehenge. Evening West End show."},
+            {"day": 9, "title": "London Shopping & Departure Prep", "description": "Oxford Street, Harrods, Covent Garden. Final dinner."},
+            {"day": 10, "title": "Departure from London", "description": "Transfer to Heathrow. Departure."}
+          ],
+          "inclusions": ["9 nights hotel (3-4 star)", "Daily breakfast", "Eurostar Paris–Brussels–Amsterdam–London", "Canal cruise Amsterdam", "Seine cruise Paris", "Expert local guides", "Schengen visa assistance"],
+          "exclusions": ["International flights", "Schengen visa fee (approx ₹7,000)", "Lunches & dinners", "Museum entries", "Personal expenses"]
+        }
+      ]
+    },
+    "vietnam": {
+      "id": "vietnam",
+      "name": "Vietnam",
+      "type": "international",
+      "tagline": "Heritage, Halong Bay & Incredible Street Food",
+      "description": "Vietnam is a country of extraordinary beauty and historical depth — from the ancient streets of Hoi An lantern-lit at night to the emerald waters of Halong Bay, the French colonial elegance of Hanoi's Old Quarter to the electric energy of Ho Chi Minh City. Arguably Southeast Asia's finest destination.",
+      "heroImage": "../images/vietnamactive.jpg",
+      "gallery": [
+        "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800",
+        "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800",
+        "https://images.unsplash.com/photo-1590086782957-93c06ef21604?w=800",
+        "https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=800",
+        "https://images.unsplash.com/photo-1504512485720-7d83a16ee930?w=800",
+        "https://images.unsplash.com/photo-1562137369-1a1a0bc73ece?w=800"
+      ],
+      "highlights": ["Halong Bay Cruise", "Hoi An Ancient Town", "Hanoi Old Quarter", "Mekong Delta", "Hue Imperial City", "Sapa Rice Terraces"],
+      "bestTime": "February – April & August – October",
+      "seo": {
+        "title": "Vietnam Tour Packages from India | Tourishq Travel Solutions",
+        "description": "Vietnam holiday packages — Halong Bay, Hoi An & Hanoi. E-visa on arrival for Indians. Starting from ₹42,999."
+      },
+      "packages": [
+        {
+          "id": "vie-9d-mid",
+          "title": "Vietnam North to South",
+          "duration": "9 Days / 8 Nights",
+          "durationDays": 9,
+          "type": "mid",
+          "price": "₹42,999",
+          "priceInt": 42999,
+          "groupSize": "2–12",
+          "image": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600",
+          "highlights": ["Halong Bay overnight cruise", "Hoi An lantern festival", "Cu Chi Tunnels Saigon"],
+          "itinerary": [
+            {"day": 1, "title": "Arrive Hanoi", "description": "Old Quarter walk, Hoan Kiem Lake, Temple of Literature. Bia Hoi street food evening."},
+            {"day": 2, "title": "Hanoi → Halong Bay", "description": "3-hour drive. Board luxury junk boat. Kayaking through caves. Sunset on deck."},
+            {"day": 3, "title": "Halong Bay", "description": "Sunrise yoga on deck. Pearl farm visit. Fishing village visit by kayak. Disembark, fly to Da Nang."},
+            {"day": 4, "title": "Da Nang & Hoi An", "description": "Marble Mountains, My Son Sanctuary (Cham towers). Evening lantern-lit Hoi An Ancient Town."},
+            {"day": 5, "title": "Hoi An", "description": "Tailor street (custom clothes), local cooking class, Tra Que herb village, cycling through rice fields."},
+            {"day": 6, "title": "Hue Imperial City", "description": "Day trip: Hue Citadel, Thien Mu Pagoda, royal tombs, dragon boat on Perfume River."},
+            {"day": 7, "title": "Fly to Ho Chi Minh City", "description": "Arrive Saigon. Ben Thanh Market, Reunification Palace, War Remnants Museum."},
+            {"day": 8, "title": "Cu Chi & Mekong", "description": "Morning Cu Chi Tunnels (wartime underground network). Afternoon Mekong Delta sampan boat."},
+            {"day": 9, "title": "Ho Chi Minh City Departure", "description": "Rooftop breakfast, final shopping, airport transfer."}
+          ],
+          "inclusions": ["8 nights hotel (3-4 star + overnight cruise)", "Daily breakfast", "Halong Bay cruise", "Internal flights (Hanoi–Da Nang, Da Nang–HCMC)", "All transfers", "Expert guide"],
+          "exclusions": ["International flights", "Vietnam e-visa (USD 25)", "Lunches & dinners", "Personal expenses"]
+        }
+      ]
+    },
+    "singapore": {
+      "id": "singapore",
+      "name": "Singapore",
+      "type": "international",
+      "tagline": "The Lion City — Gardens, Gastronomy & Urban Wonder",
+      "description": "Singapore is Asia's most dynamic city-state — a futuristic garden city where gleaming skyscrapers rise alongside lush vertical gardens, where multicultural hawker centers serve some of the world's finest food, and where Marina Bay Sands offers the most iconic skyline view on Earth.",
+      "heroImage": "../images/singaporeactive.jpg",
+      "gallery": [
+        "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800",
+        "https://images.unsplash.com/photo-1508964942454-1a56651d54ac?w=800",
+        "https://images.unsplash.com/photo-1557409518-691ebcd96038?w=800",
+        "https://images.unsplash.com/photo-1565967511849-76a60a516170?w=800",
+        "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=800",
+        "https://images.unsplash.com/photo-1496950866446-3253e1470e8e?w=800"
+      ],
+      "highlights": ["Gardens by the Bay", "Marina Bay Sands Skypark", "Sentosa Universal Studios", "Chinatown & Little India", "Night Safari", "Clarke Quay"],
+      "bestTime": "February – April",
+      "seo": {
+        "title": "Singapore Tour Packages from India | Tourishq Travel Solutions",
+        "description": "Singapore holiday packages — Gardens by the Bay, Sentosa & Marina Bay Sands. Visa-free for Indians. Starting from ₹49,999."
+      },
+      "packages": [
+        {
+          "id": "sin-5d-budget",
+          "title": "Singapore City Explorer",
+          "duration": "5 Days / 4 Nights",
+          "durationDays": 5,
+          "type": "budget",
+          "price": "₹49,999",
+          "priceInt": 49999,
+          "groupSize": "2–12",
+          "image": "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=600",
+          "highlights": ["Gardens by the Bay Supertrees", "Universal Studios Sentosa", "Marina Bay Sands Skypark", "Night Safari"],
+          "itinerary": [
+            {"day": 1, "title": "Arrive Singapore", "description": "Airport transfer. Orchard Road shopping. Evening Clarke Quay dinner on the river."},
+            {"day": 2, "title": "Sentosa Island", "description": "Universal Studios Singapore (full day). Evening S.E.A. Aquarium or Wings of Time show."},
+            {"day": 3, "title": "City & Bay", "description": "Marina Bay Sands Skypark, Gardens by the Bay (Flower Dome + Cloud Forest), Marina Bay waterfront."},
+            {"day": 4, "title": "Culture & Night Safari", "description": "Chinatown, Little India, Arab Quarter. Evening: Singapore Night Safari (world's first)."},
+            {"day": 5, "title": "Shopping & Departure", "description": "Mustafa Centre, airport duty-free. Departure."}
+          ],
+          "inclusions": ["4 nights hotel (3-4 star)", "Daily breakfast", "Airport transfers", "Universal Studios day pass", "Gardens by the Bay (domes)", "Night Safari", "Marina Bay Sands Skypark"],
+          "exclusions": ["International flights", "No visa required for Indian passport holders", "Lunches & dinners", "Personal expenses"]
+        }
+      ]
+    },
+    "japan": {
+      "id": "japan",
+      "name": "Japan",
+      "type": "international",
+      "tagline": "Ancient & Futuristic — Cherry Blossoms, Temples & Bullet Trains",
+      "description": "Japan is like no other place on Earth — a seamless blend of ancient tradition and cutting-edge modernity. Cherry blossom season in Kyoto's temple gardens, bullet trains between cities, robotic restaurants in Tokyo, and the serene meditations of Mount Koya — Japan rewards every traveler.",
+      "heroImage": "../images/japanactive.jpg",
+      "gallery": [
+        "https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=800",
+        "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800",
+        "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800",
+        "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800",
+        "https://images.unsplash.com/photo-1526481280693-3bfa7568e0f3?w=800",
+        "https://images.unsplash.com/photo-1492571350019-22de08371fd3?w=800"
+      ],
+      "highlights": ["Tokyo Shibuya Crossing", "Kyoto Golden Pavilion", "Mount Fuji", "Hiroshima Memorial", "Osaka Dotonbori", "Nara Deer Park"],
+      "bestTime": "March – May (cherry blossom) & October – November",
+      "seo": {
+        "title": "Japan Tour Packages from India | Tourishq Travel Solutions",
+        "description": "Japan holiday packages — Tokyo, Kyoto, Osaka & Mount Fuji. Visa required. Starting from ₹99,999 with bullet train pass."
+      },
+      "packages": [
+        {
+          "id": "jap-10d-mid",
+          "title": "Japan Golden Route",
+          "duration": "10 Days / 9 Nights",
+          "durationDays": 10,
+          "type": "mid",
+          "price": "₹99,999",
+          "priceInt": 99999,
+          "groupSize": "2–10",
+          "image": "https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=600",
+          "highlights": ["Tokyo 3 days", "Bullet train to Kyoto", "Mount Fuji day trip", "Osaka food tour"],
+          "itinerary": [
+            {"day": 1, "title": "Arrive Tokyo", "description": "Narita Express. Hotel check-in Shinjuku. Evening Omoide Yokocho alley & ramen."},
+            {"day": 2, "title": "Tokyo — Modern", "description": "Shibuya crossing, Harajuku Takeshita Street, Omotesando Hills, Meiji Shrine, Akihabara."},
+            {"day": 3, "title": "Tokyo — Traditional", "description": "Senso-ji Temple Asakusa, teamLab Planets (digital art), Tokyo Skytree, Sumida River cruise."},
+            {"day": 4, "title": "Mount Fuji Day Trip", "description": "Day trip to Fuji 5th Station (if season) or Hakone with Fuji views, hot springs, cable car."},
+            {"day": 5, "title": "Tokyo → Kyoto", "description": "Shinkansen bullet train (2.5 hrs). Arrive Kyoto. Gion district evening walk — geisha spotting."},
+            {"day": 6, "title": "Kyoto Temples", "description": "Fushimi Inari (10,000 torii gates at dawn), Kinkaku-ji (Golden Pavilion), Arashiyama bamboo forest."},
+            {"day": 7, "title": "Kyoto → Nara → Osaka", "description": "Nara Deer Park, Todai-ji Giant Buddha. Continue to Osaka. Dotonbori neon lights evening."},
+            {"day": 8, "title": "Osaka", "description": "Osaka Castle, Kuromon Market (food), Shinsekai, Universal Studios (optional upgrade)."},
+            {"day": 9, "title": "Hiroshima & Miyajima", "description": "Bullet train to Hiroshima. Peace Memorial Museum. Miyajima Island floating torii gate."},
+            {"day": 10, "title": "Osaka → Departure", "description": "Return to Osaka. Departure from Kansai airport."}
+          ],
+          "inclusions": ["9 nights hotel (3-4 star)", "Daily breakfast", "7-day JR Pass (bullet trains)", "Airport Narita Express", "All guided tours", "Visa assistance"],
+          "exclusions": ["International flights", "Japan visa (approx ₹3,500)", "Lunches & dinners", "Universal Studios", "Personal expenses"]
+        }
+      ]
+    },
+    "australia": {
+      "id": "australia",
+      "name": "Australia",
+      "type": "international",
+      "tagline": "The Great Outdoors — Coral Reefs, Outback & City Glamour",
+      "description": "Australia is a continent of extraordinary diversity — the technicolor Great Barrier Reef, the ancient ochre Uluru rising from the Outback, the opera house on Sydney Harbour, and the wild coastlines of the Great Ocean Road. Koalas, kangaroos, and world-class wine await.",
+      "heroImage": "../images/australiaactive.jpg",
+      "gallery": [
+        "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=800",
+        "https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?w=800",
+        "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=800",
+        "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800",
+        "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800",
+        "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800"
+      ],
+      "highlights": ["Sydney Opera House", "Great Barrier Reef Snorkeling", "Uluru at Sunrise", "Great Ocean Road", "Cairns Rainforest", "Bondi Beach"],
+      "bestTime": "September – November & March – May",
+      "seo": {
+        "title": "Australia Tour Packages from India | Tourishq Travel Solutions",
+        "description": "Australia holiday packages — Sydney, Great Barrier Reef & Uluru. Starting from ₹1,19,999 with flights."
+      },
+      "packages": [
+        {
+          "id": "aus-12d-mid",
+          "title": "Australia East Coast Explorer",
+          "duration": "12 Days / 11 Nights",
+          "durationDays": 12,
+          "type": "mid",
+          "price": "₹1,19,999",
+          "priceInt": 119999,
+          "groupSize": "2–8",
+          "image": "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=600",
+          "highlights": ["Sydney 3 nights", "Great Barrier Reef diving/snorkeling", "Cairns Daintree rainforest"],
+          "itinerary": [
+            {"day": 1, "title": "Arrive Sydney", "description": "Airport transfer. Circular Quay. Sydney Opera House exterior. Bridge Climb (optional)."},
+            {"day": 2, "title": "Sydney City", "description": "Bondi Beach, Taronga Zoo, Darling Harbour, The Rocks historic district."},
+            {"day": 3, "title": "Blue Mountains Day Trip", "description": "Three Sisters, Scenic World cable car, Jenolan Caves. Return to Sydney."},
+            {"day": 4, "title": "Sydney → Cairns", "description": "Fly to Cairns. Afternoon at leisure. Muddy's Playground beach."},
+            {"day": 5, "title": "Great Barrier Reef", "description": "Full-day cruise to outer reef. Snorkeling & scuba diving (certified). Glass-bottom boat optional."},
+            {"day": 6, "title": "Daintree Rainforest", "description": "World's oldest tropical rainforest (135 million years). Mossman Gorge swim. Cape Tribulation."},
+            {"day": 7, "title": "Cairns → Melbourne", "description": "Fly to Melbourne. Yarra River walk, Federation Square, Queen Victoria Market evening."},
+            {"day": 8, "title": "Melbourne City", "description": "Royal Botanic Gardens, NGV art gallery, Laneways street art, St. Kilda Beach."},
+            {"day": 9, "title": "Great Ocean Road Day 1", "description": "Drive the world-famous coastal road. Torquay Surf Beach, Lorne, Apollo Bay."},
+            {"day": 10, "title": "Great Ocean Road Day 2", "description": "Twelve Apostles limestone stacks. Loch Ard Gorge. Return to Melbourne."},
+            {"day": 11, "title": "Melbourne to Sydney", "description": "Morning Healesville Sanctuary (koalas, kangaroos). Fly to Sydney for departure connection."},
+            {"day": 12, "title": "Departure", "description": "Transfer to Sydney international airport. Departure."}
+          ],
+          "inclusions": ["11 nights hotel (4-star)", "Daily breakfast", "Internal flights (Sydney-Cairns, Cairns-Melbourne)", "Great Barrier Reef cruise", "All guided tours", "Airport transfers", "Visa assistance"],
+          "exclusions": ["International flights", "Australian visa (approx ₹8,000)", "Lunches & dinners", "Scuba diving upgrade", "Personal expenses"]
+        }
+      ]
+    }
+  }
+}

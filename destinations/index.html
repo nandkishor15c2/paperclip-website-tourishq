@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Browse all destinations offered by Tourishq — Indian and international travel packages with search and filter by type.">
+    <meta name="keywords" content="travel destinations, india travel, international travel, tour packages, rajasthan, kerala, bali, dubai, tourishq">
+    <title>All Destinations | Tourishq Travel Solutions</title>
+
+    <link rel="icon" type="image/svg+xml" href="../images/tourishq-icon.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "All Travel Destinations — Tourishq",
+        "description": "Browse domestic and international travel destinations with packages by Tourishq Travel Solutions, Jaipur.",
+        "url": "https://tourishq.com/destinations/"
+    }
+    </script>
+
+    <style>
+        body { font-family: 'Manrope', sans-serif; background-color: #1a1a1a; color: #fff; }
+        h1,h2,h3,h4,h5,h6 { font-family: 'Montserrat', sans-serif; font-weight: 700; color: #ffffff; }
+        .secondary-text { color: #FFBC00; }
+
+        /* --- CAROUSEL --- */
+        .scrolling-wrapper {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            gap: 1.5rem;
+            padding-bottom: 1.5rem;
+            scrollbar-width: none;
+        }
+        .scrolling-wrapper::-webkit-scrollbar { display: none; }
+
+        .scrolling-card {
+            flex: 0 0 auto;
+            width: 85vw;
+            max-width: 340px;
+            scroll-snap-align: start;
+        }
+
+        @media (min-width: 640px) {
+            .scrolling-card { width: 340px; }
+        }
+
+        /* --- CARD --- */
+        .dest-card {
+            position: relative;
+            width: 100%;
+            height: 320px;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            display: block;
+            text-decoration: none;
+        }
+        .dest-card-img-wrap {
+            position: absolute;
+            inset: 0;
+            transition: transform 0.5s ease-out;
+            transform-origin: center;
+        }
+        .dest-card:hover .dest-card-img-wrap { transform: scale(1.1); }
+        .dest-card-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+
+        .dest-overlay {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 2;
+            background: linear-gradient(to top,
+                rgba(0,0,0,0.95) 0%,
+                rgba(0,0,0,0.7) 15%,
+                rgba(0,0,0,0.45) 35%,
+                rgba(0,0,0,0.15) 55%,
+                transparent 70%
+            );
+        }
+
+        .dest-card-content {
+            position: absolute;
+            inset: 0;
+            padding: 24px;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            text-align: center;
+        }
+        .dest-card-name {
+            position: absolute;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            white-space: nowrap;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+            transition: bottom 0.5s ease-out, top 0.5s ease-out;
+            width: max-content;
+            max-width: calc(100% - 32px);
+        }
+        .dest-card:hover .dest-card-name { bottom: auto; top: 24px; }
+
+        .dest-card-hover { opacity: 0; transition: opacity 0.3s ease; text-align: center; padding: 0 8px; }
+        .dest-card:hover .dest-card-hover { opacity: 1; }
+
+        .dest-card-hover-tag {
+            display: inline-block;
+            padding: 2px 12px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #fff;
+            background: rgba(0,158,131,0.8);
+            border-radius: 999px;
+            margin-bottom: 10px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        }
+        .dest-card-hover-desc {
+            font-size: 13px;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 12px;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+            max-width: 220px;
+            line-height: 1.4;
+        }
+        .dest-card-hover-link {
+            font-size: 13px;
+            font-weight: 600;
+            color: #FFBC00;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* --- FILTER --- */
+        .filter-btn { transition: all 0.2s ease; }
+        .filter-btn.active { background-color: #009E83; border-color: #009E83; color: #fff; }
+        #search-input:focus { outline: none; box-shadow: 0 0 0 2px #009E83; }
+
+        /* --- NAV ARROWS --- */
+        .carousel-nav-btn {
+            width: 44px; height: 44px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 50%;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.12);
+        }
+        .carousel-nav-btn:hover { background: rgba(255,255,255,0.15); color: #FFBC00; }
+    </style>
+</head>
+
+<body class="overflow-x-hidden">
+    <script>window.pagePath = '../';</script>
+    <div id="header-placeholder"></div>
+
+    <!-- PAGE HEADER -->
+    <section class="relative pt-16 pb-16 overflow-hidden">
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute top-0 left-0 w-96 h-96 bg-[#009E83] rounded-full mix-blend-screen filter blur-[150px] opacity-10"></div>
+            <div class="absolute bottom-0 right-0 w-80 h-80 bg-[#FFBC00] rounded-full mix-blend-screen filter blur-[120px] opacity-5"></div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <span class="inline-block py-1 px-3 rounded-full bg-[#009E83]/10 border border-[#009E83]/30 text-[#009E83] text-xs font-bold uppercase tracking-widest mb-4">Explore The World</span>
+            <h1 class="text-5xl md:text-7xl font-black text-white mb-4">All Destinations</h1>
+            <p class="text-lg text-gray-400 max-w-2xl mx-auto">Handpicked journeys across India and the world — from the Himalayas to the Mediterranean, tailored for every budget.</p>
+
+            <div class="mt-8 max-w-md mx-auto relative">
+                <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                <input id="search-input" type="text" placeholder="Search destination..."
+                    class="w-full bg-white/5 border border-white/15 rounded-full py-3.5 pl-12 pr-5 text-white placeholder-gray-500 transition-all">
+            </div>
+        </div>
+    </section>
+
+    <!-- FILTERS -->
+    <div class="sticky top-0 z-30 bg-[#1a1a1a]/90 backdrop-blur-xl border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex flex-wrap items-center gap-3">
+                <span class="text-xs text-gray-500 font-bold uppercase tracking-wide">Filter:</span>
+                <button class="filter-btn type-filter active text-xs font-bold border border-white/20 text-gray-300 px-4 py-1.5 rounded-full" data-value="all">All</button>
+                <button class="filter-btn type-filter text-xs font-bold border border-white/20 text-gray-300 px-4 py-1.5 rounded-full" data-value="domestic">
+                    <i class="fas fa-flag mr-1 text-[#009E83]"></i>Incredible India
+                </button>
+                <button class="filter-btn type-filter text-xs font-bold border border-white/20 text-gray-300 px-4 py-1.5 rounded-full" data-value="international">
+                    <i class="fas fa-globe mr-1 text-[#FFBC00]"></i>International
+                </button>
+                <div class="ml-auto flex items-center gap-2 text-xs text-gray-500">
+                    <i class="fas fa-map-marked-alt text-[#009E83]"></i>
+                    <span id="results-count">– destinations</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+        <!-- Domestic Carousel -->
+        <section id="domestic-section" class="mb-12">
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center gap-2 py-1 px-3 rounded-full bg-[#009E83]/10 border border-[#009E83]/30 text-[#009E83] text-xs font-bold uppercase tracking-widest">
+                        <i class="fas fa-flag"></i> Incredible India
+                    </span>
+                    <span id="domestic-count" class="text-xs text-gray-500 font-medium"></span>
+                </div>
+                <div class="flex gap-2">
+                    <button onclick="scrollCarousel('domestic-carousel','left')" class="carousel-nav-btn">
+                        <i class="fas fa-arrow-left text-sm"></i>
+                    </button>
+                    <button onclick="scrollCarousel('domestic-carousel','right')" class="carousel-nav-btn">
+                        <i class="fas fa-arrow-right text-sm"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="domestic-carousel" class="scrolling-wrapper"></div>
+        </section>
+
+        <!-- International Carousel -->
+        <section id="international-section" class="mb-12">
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center gap-2 py-1 px-3 rounded-full bg-[#FFBC00]/10 border border-[#FFBC00]/30 text-[#FFBC00] text-xs font-bold uppercase tracking-widest">
+                        <i class="fas fa-globe"></i> World Wonders
+                    </span>
+                    <span id="international-count" class="text-xs text-gray-500 font-medium"></span>
+                </div>
+                <div class="flex gap-2">
+                    <button onclick="scrollCarousel('international-carousel','left')" class="carousel-nav-btn">
+                        <i class="fas fa-arrow-left text-sm"></i>
+                    </button>
+                    <button onclick="scrollCarousel('international-carousel','right')" class="carousel-nav-btn">
+                        <i class="fas fa-arrow-right text-sm"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="international-carousel" class="scrolling-wrapper"></div>
+        </section>
+
+        <!-- No results -->
+        <div id="no-results" style="display:none;" class="text-center py-24">
+            <div class="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-search text-3xl text-gray-600"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">No destinations found</h3>
+            <p class="text-gray-400 mb-6">Try adjusting your filters or search term.</p>
+            <button id="reset-filters" class="inline-flex items-center gap-2 bg-[#009E83] text-white font-bold px-6 py-3 rounded-xl hover:bg-[#007a66] transition">
+                <i class="fas fa-redo"></i> Reset Filters
+            </button>
+        </div>
+
+    </main>
+
+    <!-- CTA BANNER -->
+    <section class="bg-gradient-to-r from-[#009E83] to-[#007a66] py-16">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-black text-white mb-4">Can't find what you're looking for?</h2>
+            <p class="text-green-100 text-lg mb-8">We craft custom itineraries to any destination in the world. Tell us your dream trip.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="openLeadForm()" class="inline-flex items-center justify-center gap-2 bg-white text-[#009E83] font-bold px-8 py-4 rounded-xl hover:bg-gray-100 transition-all">
+                    <i class="fas fa-paper-plane"></i> Get a Custom Quote
+                </button>
+                <a href="tel:+919116794500" class="inline-flex items-center justify-center gap-2 border-2 border-white/40 text-white font-bold px-8 py-4 rounded-xl hover:border-white hover:bg-white/10 transition-all">
+                    <i class="fas fa-phone"></i> +91 91167 94500
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+    <div id="lead-form-placeholder"></div>
+
+    <script src="../js/components.js" defer></script>
+
+    <script>
+    (function() {
+        let allDestinations = [];
+        let filters = { type: 'all', search: '' };
+
+        window.scrollCarousel = function(id, dir) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            const amount = 340;
+            el.scrollBy({ left: dir === 'left' ? -amount : amount, behavior: 'smooth' });
+        };
+
+        fetch('../data/destinations.json')
+            .then(r => r.json())
+            .then(data => {
+                allDestinations = Object.values(data.destinations);
+                renderAll();
+                setupFilters();
+            })
+            .catch(err => console.error('Failed to load destinations:', err));
+
+        function matchesFilters(dest) {
+            if (filters.type !== 'all' && dest.type !== filters.type) return false;
+            if (filters.search) {
+                const q = filters.search.toLowerCase();
+                const hay = (dest.name + ' ' + dest.tagline + ' ' + (dest.highlights || []).join(' ')).toLowerCase();
+                if (!hay.includes(q)) return false;
+            }
+            return true;
+        }
+
+        function buildCard(dest) {
+            const tagLabel = dest.type === 'domestic' ? 'India' : 'International';
+            return `
+                <div class="scrolling-card">
+                    <a href="region.html?id=${dest.id}" class="dest-card">
+                        <div class="dest-card-img-wrap">
+                            <img src="${dest.heroImage}" alt="${dest.name}" loading="lazy"
+                                 onerror="this.src='../images/hero.png'">
+                        </div>
+                        <div class="dest-overlay"></div>
+                        <div class="dest-card-content">
+                            <span class="dest-card-name">${dest.name}</span>
+                            <div class="dest-card-hover">
+                                <span class="dest-card-hover-tag">${tagLabel}</span>
+                                <p class="dest-card-hover-desc">${dest.tagline}</p>
+                                <span class="dest-card-hover-link">
+                                    Explore
+                                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                </div>`;
+        }
+
+        function renderAll() {
+            const domestic = allDestinations.filter(d => d.type === 'domestic' && matchesFilters(d));
+            const intl = allDestinations.filter(d => d.type === 'international' && matchesFilters(d));
+
+            document.getElementById('domestic-carousel').innerHTML = domestic.length
+                ? domestic.map(buildCard).join('')
+                : '<div class="text-gray-500 text-sm py-8 px-4">No domestic destinations match your search.</div>';
+
+            document.getElementById('international-carousel').innerHTML = intl.length
+                ? intl.map(buildCard).join('')
+                : '<div class="text-gray-500 text-sm py-8 px-4">No international destinations match your search.</div>';
+
+            document.getElementById('domestic-count').textContent = `${domestic.length} destination${domestic.length !== 1 ? 's' : ''}`;
+            document.getElementById('international-count').textContent = `${intl.length} destination${intl.length !== 1 ? 's' : ''}`;
+
+            const total = domestic.length + intl.length;
+            document.getElementById('results-count').textContent = `${total} destination${total !== 1 ? 's' : ''}`;
+
+            const noResults = total === 0;
+            document.getElementById('no-results').style.display = noResults ? 'block' : 'none';
+            document.getElementById('domestic-section').style.display = (filters.type === 'international' && !domestic.length) ? 'none' : '';
+            document.getElementById('international-section').style.display = (filters.type === 'domestic' && !intl.length) ? 'none' : '';
+        }
+
+        function setupFilters() {
+            document.querySelectorAll('.type-filter').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.type-filter').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    filters.type = btn.dataset.value;
+                    renderAll();
+                });
+            });
+
+            let searchTimeout;
+            document.getElementById('search-input').addEventListener('input', e => {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    filters.search = e.target.value.trim();
+                    renderAll();
+                }, 200);
+            });
+
+            document.getElementById('reset-filters').addEventListener('click', () => {
+                filters = { type: 'all', search: '' };
+                document.getElementById('search-input').value = '';
+                document.querySelectorAll('.type-filter').forEach(b => b.classList.remove('active'));
+                document.querySelector('.type-filter[data-value="all"]').classList.add('active');
+                renderAll();
+            });
+        }
+    })();
+    </script>
+</body>
+</html>

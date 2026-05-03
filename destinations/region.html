@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore destinations with Tourishq Travel Solutions">
+    <title>Destination | Tourishq</title>
+
+    <link rel="icon" type="image/svg+xml" href="../images/tourishq-icon.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        body { font-family: 'Manrope', sans-serif; background-color: #1a1a1a; color: #ffffff; }
+        h1,h2,h3,h4,h5,h6 { font-family: 'Montserrat', sans-serif; font-weight: 700; }
+
+        /* Hero parallax */
+        #hero-bg { transition: transform 0.1s ease-out; }
+
+        /* Gallery masonry */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 200px);
+            gap: 8px;
+        }
+        .gallery-grid .gallery-item:first-child { grid-column: span 2; }
+        @media (max-width: 640px) {
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
+            .gallery-grid .gallery-item:first-child { grid-column: span 2; }
+        }
+
+        /* Package card */
+        .package-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .package-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+
+        /* Accordion */
+        .itinerary-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+        .itinerary-body.open { max-height: 2000px; }
+
+        /* Lightbox */
+        #gallery-lightbox { transition: opacity 0.3s ease; }
+        #gallery-lightbox.visible { opacity: 1; pointer-events: auto; }
+
+        /* Highlights scroll */
+        .highlights-scroll { scrollbar-width: none; }
+        .highlights-scroll::-webkit-scrollbar { display: none; }
+
+        /* Type badges */
+        .badge-budget { background: rgba(34,197,94,0.15); color: #4ade80; border: 1px solid rgba(34,197,94,0.3); }
+        .badge-mid { background: rgba(59,130,246,0.15); color: #60a5fa; border: 1px solid rgba(59,130,246,0.3); }
+        .badge-luxury { background: rgba(234,179,8,0.15); color: #facc15; border: 1px solid rgba(234,179,8,0.3); }
+    </style>
+</head>
+
+<body class="overflow-x-hidden">
+    <script>window.pagePath = '../';</script>
+    <div id="header-placeholder"></div>
+
+    <!-- HERO -->
+    <section id="hero" class="relative h-[70vh] min-h-[500px] flex items-end overflow-hidden">
+        <div id="hero-bg" class="absolute inset-0 bg-cover bg-center scale-110" style="background-image: url('https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=1600');"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-black/50 to-transparent"></div>
+        <div class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+            <div id="hero-breadcrumb" class="flex items-center gap-2 text-sm text-gray-400 mb-4">
+                <a href="../index.html" class="hover:text-white transition">Home</a>
+                <i class="fas fa-chevron-right text-xs"></i>
+                <a href="index.html" class="hover:text-white transition">Destinations</a>
+                <i class="fas fa-chevron-right text-xs"></i>
+                <span id="hero-dest-name" class="text-white">Loading...</span>
+            </div>
+            <h1 id="hero-title" class="text-5xl md:text-7xl font-black text-white mb-3 leading-none">–</h1>
+            <p id="hero-tagline" class="text-lg md:text-xl text-gray-300 mb-6 max-w-2xl"></p>
+            <div class="flex flex-wrap gap-4">
+                <a href="#packages" class="inline-flex items-center gap-2 bg-[#009E83] hover:bg-[#007a66] text-white font-bold px-8 py-3.5 rounded-xl transition-all duration-300 hover:-translate-y-0.5 shadow-lg shadow-[#009E83]/25">
+                    <i class="fas fa-suitcase-rolling"></i> View Packages
+                </a>
+                <button onclick="openLeadForm()" class="inline-flex items-center gap-2 border border-white/30 hover:border-white text-white hover:bg-white hover:text-black font-bold px-8 py-3.5 rounded-xl transition-all duration-300 backdrop-blur-sm">
+                    <i class="fas fa-paper-plane"></i> Get Free Quote
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- HIGHLIGHTS STRIP -->
+    <div class="bg-black/40 backdrop-blur-sm border-b border-white/5 py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div id="highlights-strip" class="highlights-scroll flex items-center gap-3 overflow-x-auto pb-1">
+                <!-- Rendered by JS -->
+            </div>
+        </div>
+    </div>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-20">
+
+        <!-- PACKAGES SECTION -->
+        <section id="packages">
+            <div class="flex items-end justify-between mb-10">
+                <div>
+                    <span class="inline-block py-1 px-3 rounded-full bg-[#009E83]/10 border border-[#009E83]/30 text-[#009E83] text-xs font-bold uppercase tracking-widest mb-3">Our Packages</span>
+                    <h2 class="text-3xl md:text-4xl font-black text-white">Choose Your Journey</h2>
+                    <p class="text-gray-400 mt-2">Every package is fully customizable — budget, duration, group size.</p>
+                </div>
+                <a href="#gallery" class="hidden md:inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white transition">
+                    See Gallery <i class="fas fa-arrow-down text-xs"></i>
+                </a>
+            </div>
+
+            <div id="packages-grid" class="space-y-6">
+                <!-- Package cards rendered by JS -->
+            </div>
+        </section>
+
+        <!-- GALLERY SECTION -->
+        <section id="gallery">
+            <span class="inline-block py-1 px-3 rounded-full bg-[#FFBC00]/10 border border-[#FFBC00]/30 text-[#FFBC00] text-xs font-bold uppercase tracking-widest mb-3">Gallery</span>
+            <h2 class="text-3xl md:text-4xl font-black text-white mb-8">Discover the Beauty</h2>
+            <div id="gallery-grid" class="gallery-grid">
+                <!-- Rendered by JS -->
+            </div>
+        </section>
+
+        <!-- INFO BAR -->
+        <section id="info-bar">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+                    <div class="w-10 h-10 bg-[#009E83]/20 rounded-xl flex items-center justify-center mb-3">
+                        <i class="fas fa-calendar-alt text-[#009E83]"></i>
+                    </div>
+                    <p class="text-xs text-gray-500 uppercase tracking-wide font-bold mb-1">Best Time</p>
+                    <p id="info-besttime" class="text-white font-semibold">–</p>
+                </div>
+                <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+                    <div class="w-10 h-10 bg-[#FFBC00]/20 rounded-xl flex items-center justify-center mb-3">
+                        <i class="fas fa-users text-[#FFBC00]"></i>
+                    </div>
+                    <p class="text-xs text-gray-500 uppercase tracking-wide font-bold mb-1">Group Size</p>
+                    <p id="info-group" class="text-white font-semibold">2 – 15 people</p>
+                </div>
+                <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+                    <div class="w-10 h-10 bg-[#009E83]/20 rounded-xl flex items-center justify-center mb-3">
+                        <i class="fas fa-rupee-sign text-[#009E83]"></i>
+                    </div>
+                    <p class="text-xs text-gray-500 uppercase tracking-wide font-bold mb-1">Starts From</p>
+                    <p id="info-price" class="text-white font-semibold">–</p>
+                </div>
+                <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+                    <div class="w-10 h-10 bg-green-500/20 rounded-xl flex items-center justify-center mb-3">
+                        <i class="fab fa-whatsapp text-green-400 text-xl"></i>
+                    </div>
+                    <p class="text-xs text-gray-500 uppercase tracking-wide font-bold mb-1">Quick Enquiry</p>
+                    <a id="whatsapp-link" href="#" target="_blank" rel="noopener" class="text-green-400 font-semibold hover:text-green-300 transition">Chat on WhatsApp</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA SECTION -->
+        <section class="relative rounded-3xl overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-r from-[#009E83] to-[#007a66]"></div>
+            <div class="absolute inset-0 opacity-10" style="background-image: url('../images/tourishq-icon.svg'); background-repeat: no-repeat; background-position: right center; background-size: 300px;"></div>
+            <div class="relative z-10 p-10 md:p-16 flex flex-col md:flex-row items-center justify-between gap-8">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-black text-white mb-3">Ready to Plan Your Trip?</h2>
+                    <p class="text-green-100 text-lg">Our travel architects will craft a personalized itinerary for you — free consultation, no commitment.</p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-4 flex-shrink-0">
+                    <button onclick="openLeadForm()" class="inline-flex items-center justify-center gap-2 bg-white text-[#009E83] font-bold px-8 py-4 rounded-xl hover:bg-gray-100 transition-all duration-300 hover:-translate-y-0.5 shadow-xl whitespace-nowrap">
+                        <i class="fas fa-paper-plane"></i> Get Free Quote
+                    </button>
+                    <a href="tel:+919116794500" class="inline-flex items-center justify-center gap-2 border-2 border-white/40 text-white font-bold px-8 py-4 rounded-xl hover:border-white hover:bg-white/10 transition-all duration-300 whitespace-nowrap">
+                        <i class="fas fa-phone"></i> Call Expert
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Gallery Lightbox -->
+    <div id="gallery-lightbox" class="fixed inset-0 z-[150] bg-black/90 flex items-center justify-center p-4 opacity-0 pointer-events-none">
+        <button id="lb-close" class="absolute top-4 right-4 w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white text-xl transition-colors">
+            <i class="fas fa-times"></i>
+        </button>
+        <button id="lb-prev" class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white text-xl transition-colors">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button id="lb-next" class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white text-xl transition-colors">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <img id="lb-img" src="" alt="" class="max-w-full max-h-full object-contain rounded-lg shadow-2xl">
+    </div>
+
+    <div id="footer-placeholder"></div>
+    <div id="lead-form-placeholder"></div>
+
+    <script src="../js/components.js" defer></script>
+
+    <script>
+    (function() {
+        const params = new URLSearchParams(window.location.search);
+        const destId = params.get('id');
+
+        if (!destId) { showNotFound(); return; }
+
+        fetch('../data/destinations.json')
+            .then(r => r.json())
+            .then(data => {
+                const dest = data.destinations[destId];
+                if (!dest) { showNotFound(); return; }
+                initPage(dest);
+            })
+            .catch(() => showNotFound());
+
+        function showNotFound() {
+            document.getElementById('hero-title').textContent = 'Destination Not Found';
+            document.getElementById('hero-tagline').textContent = 'We could not find that destination. Please browse our full catalog.';
+            document.getElementById('packages-grid').innerHTML = `
+                <div class="text-center py-16">
+                    <i class="fas fa-map-marked-alt text-5xl text-gray-600 mb-4"></i>
+                    <p class="text-gray-400 mb-6">This destination isn't in our catalog yet.</p>
+                    <a href="index.html" class="inline-flex items-center gap-2 bg-[#009E83] text-white font-bold px-6 py-3 rounded-xl hover:bg-[#007a66] transition">
+                        <i class="fas fa-arrow-left"></i> Browse All Destinations
+                    </a>
+                </div>`;
+        }
+
+        function initPage(dest) {
+            // SEO
+            document.title = dest.seo ? dest.seo.title : `${dest.name} | Tourishq`;
+            const metaDesc = document.querySelector('meta[name="description"]');
+            if (metaDesc && dest.seo) metaDesc.content = dest.seo.description;
+
+            // JSON-LD
+            const ld = document.createElement('script');
+            ld.type = 'application/ld+json';
+            ld.text = JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "TouristDestination",
+                "name": dest.name,
+                "description": dest.description,
+                "touristType": dest.type === 'domestic' ? "Domestic" : "International",
+                "url": window.location.href
+            });
+            document.head.appendChild(ld);
+
+            // Hero
+            document.getElementById('hero-bg').style.backgroundImage = `url('${dest.heroImage}')`;
+            document.getElementById('hero-title').textContent = dest.name;
+            document.getElementById('hero-tagline').textContent = dest.tagline;
+            document.getElementById('hero-dest-name').textContent = dest.name;
+
+            // Highlights strip
+            const strip = document.getElementById('highlights-strip');
+            strip.innerHTML = dest.highlights.map(h => `
+                <span class="flex-shrink-0 inline-flex items-center gap-2 bg-white/10 border border-white/10 rounded-full px-4 py-1.5 text-sm font-medium text-white">
+                    <i class="fas fa-map-marker-alt text-[#009E83] text-xs"></i> ${h}
+                </span>`).join('');
+
+            // Info bar
+            document.getElementById('info-besttime').textContent = dest.bestTime;
+            const lowestPrice = dest.packages.reduce((min, p) => p.priceInt < min ? p.priceInt : min, Infinity);
+            const lowestPkg = dest.packages.find(p => p.priceInt === lowestPrice);
+            document.getElementById('info-price').textContent = lowestPkg ? lowestPkg.price + ' per person' : 'Contact us';
+            const waText = encodeURIComponent(`Hi Tourishq! I'm interested in a trip to ${dest.name}. Please share more details.`);
+            document.getElementById('whatsapp-link').href = `https://wa.me/919116794500?text=${waText}`;
+
+            // Packages
+            renderPackages(dest);
+
+            // Gallery
+            renderGallery(dest.gallery);
+        }
+
+        function typeBadge(type) {
+            const map = { budget: ['badge-budget', 'Budget'], mid: ['badge-mid', 'Mid-Range'], luxury: ['badge-luxury', 'Luxury'] };
+            const [cls, label] = map[type] || ['badge-mid', type];
+            return `<span class="text-xs font-bold uppercase tracking-wide px-3 py-1 rounded-full ${cls}">${label}</span>`;
+        }
+
+        function renderPackages(dest) {
+            const grid = document.getElementById('packages-grid');
+            grid.innerHTML = dest.packages.map((pkg, idx) => `
+                <div class="package-card bg-[#222] border border-white/10 rounded-2xl overflow-hidden">
+                    <div class="grid md:grid-cols-5">
+                        <!-- Image -->
+                        <div class="md:col-span-2 relative h-52 md:h-auto overflow-hidden">
+                            <img src="${pkg.image}" alt="${pkg.title}" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-r from-transparent to-[#222] hidden md:block"></div>
+                        </div>
+                        <!-- Content -->
+                        <div class="md:col-span-3 p-6 md:p-8 flex flex-col justify-between">
+                            <div>
+                                <div class="flex flex-wrap items-center gap-2 mb-3">
+                                    ${typeBadge(pkg.type)}
+                                    <span class="text-xs text-gray-400 font-medium"><i class="fas fa-clock mr-1"></i>${pkg.duration}</span>
+                                    <span class="text-xs text-gray-400 font-medium"><i class="fas fa-users mr-1"></i>${pkg.groupSize} pax</span>
+                                </div>
+                                <h3 class="text-xl md:text-2xl font-bold text-white mb-3">${pkg.title}</h3>
+                                <ul class="space-y-1 mb-4">
+                                    ${pkg.highlights.map(h => `<li class="flex items-start gap-2 text-sm text-gray-300"><i class="fas fa-check text-[#009E83] mt-0.5 flex-shrink-0"></i>${h}</li>`).join('')}
+                                </ul>
+                            </div>
+                            <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-white/10">
+                                <div>
+                                    <p class="text-xs text-gray-500 uppercase tracking-wide font-bold">Starts From</p>
+                                    <p class="text-2xl font-black text-[#FFBC00]">${pkg.price}</p>
+                                    <p class="text-xs text-gray-500">per person</p>
+                                </div>
+                                <div class="flex flex-wrap gap-3">
+                                    <button
+                                        class="view-itinerary-btn text-sm font-semibold text-gray-300 hover:text-white border border-white/20 hover:border-white/40 px-4 py-2 rounded-lg transition-all"
+                                        data-idx="${idx}"
+                                    >
+                                        <i class="fas fa-list mr-1"></i> Itinerary
+                                    </button>
+                                    <button
+                                        class="book-btn bg-[#009E83] hover:bg-[#007a66] text-white font-bold px-5 py-2.5 rounded-xl transition-all hover:-translate-y-0.5 text-sm"
+                                        data-title="${pkg.title}"
+                                        data-price="${pkg.price}"
+                                        data-duration="${pkg.duration}"
+                                        data-image="${pkg.image}"
+                                    >
+                                        <i class="fas fa-paper-plane mr-1"></i> Enquire Now
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Itinerary Accordion -->
+                    <div class="itinerary-body" id="itinerary-${idx}">
+                        <div class="border-t border-white/10 p-6 md:p-8">
+                            <h4 class="text-base font-bold text-white mb-4 flex items-center gap-2"><i class="fas fa-route text-[#009E83]"></i> Day-by-Day Itinerary</h4>
+                            <div class="space-y-4">
+                                ${pkg.itinerary.map(day => `
+                                    <div class="flex gap-4">
+                                        <div class="flex-shrink-0 w-12 h-12 bg-[#009E83]/15 border border-[#009E83]/30 rounded-xl flex items-center justify-center">
+                                            <span class="text-xs font-black text-[#009E83] uppercase">D${day.day}</span>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-white text-sm">${day.title}</p>
+                                            <p class="text-gray-400 text-sm mt-0.5">${day.description}</p>
+                                        </div>
+                                    </div>`).join('')}
+                            </div>
+                            <div class="mt-6 grid sm:grid-cols-2 gap-4">
+                                <div>
+                                    <h5 class="text-xs font-bold text-gray-400 uppercase tracking-wide mb-2"><i class="fas fa-check-circle text-green-400 mr-1"></i>Inclusions</h5>
+                                    <ul class="space-y-1">
+                                        ${pkg.inclusions.map(i => `<li class="text-xs text-gray-300 flex items-start gap-1.5"><i class="fas fa-circle text-green-500 text-[6px] mt-1.5 flex-shrink-0"></i>${i}</li>`).join('')}
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="text-xs font-bold text-gray-400 uppercase tracking-wide mb-2"><i class="fas fa-times-circle text-red-400 mr-1"></i>Exclusions</h5>
+                                    <ul class="space-y-1">
+                                        ${pkg.exclusions.map(e => `<li class="text-xs text-gray-300 flex items-start gap-1.5"><i class="fas fa-circle text-red-500 text-[6px] mt-1.5 flex-shrink-0"></i>${e}</li>`).join('')}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`).join('');
+
+            // Wire accordion buttons
+            document.querySelectorAll('.view-itinerary-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const idx = btn.dataset.idx;
+                    const body = document.getElementById(`itinerary-${idx}`);
+                    const isOpen = body.classList.contains('open');
+                    // Close all
+                    document.querySelectorAll('.itinerary-body.open').forEach(b => b.classList.remove('open'));
+                    if (!isOpen) body.classList.add('open');
+                });
+            });
+
+            // Wire book buttons
+            document.querySelectorAll('.book-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    openLeadForm({
+                        title: btn.dataset.title,
+                        price: btn.dataset.price,
+                        duration: btn.dataset.duration,
+                        image: btn.dataset.image,
+                        url: window.location.href
+                    });
+                });
+            });
+        }
+
+        function renderGallery(images) {
+            const grid = document.getElementById('gallery-grid');
+            grid.innerHTML = images.map((img, i) => `
+                <div class="gallery-item overflow-hidden rounded-xl cursor-pointer group" data-idx="${i}">
+                    <img src="${img}" alt="Gallery ${i+1}" loading="lazy" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                </div>`).join('');
+
+            let currentIdx = 0;
+            const lightbox = document.getElementById('gallery-lightbox');
+            const lbImg = document.getElementById('lb-img');
+
+            const openLightbox = (idx) => {
+                currentIdx = idx;
+                lbImg.src = images[currentIdx];
+                lightbox.classList.add('visible');
+                document.body.style.overflow = 'hidden';
+            };
+            const closeLightbox = () => {
+                lightbox.classList.remove('visible');
+                document.body.style.overflow = '';
+            };
+
+            document.querySelectorAll('.gallery-item').forEach(item => {
+                item.addEventListener('click', () => openLightbox(parseInt(item.dataset.idx)));
+            });
+            document.getElementById('lb-close').addEventListener('click', closeLightbox);
+            lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+            document.getElementById('lb-prev').addEventListener('click', () => {
+                currentIdx = (currentIdx - 1 + images.length) % images.length;
+                lbImg.src = images[currentIdx];
+            });
+            document.getElementById('lb-next').addEventListener('click', () => {
+                currentIdx = (currentIdx + 1) % images.length;
+                lbImg.src = images[currentIdx];
+            });
+            document.addEventListener('keydown', e => {
+                if (!lightbox.classList.contains('visible')) return;
+                if (e.key === 'ArrowLeft') document.getElementById('lb-prev').click();
+                if (e.key === 'ArrowRight') document.getElementById('lb-next').click();
+                if (e.key === 'Escape') closeLightbox();
+            });
+        }
+
+        // Subtle parallax on hero
+        window.addEventListener('scroll', () => {
+            const bg = document.getElementById('hero-bg');
+            if (bg) bg.style.transform = `scale(1.1) translateY(${window.scrollY * 0.15}px)`;
+        }, { passive: true });
+    })();
+    </script>
+</body>
+</html>

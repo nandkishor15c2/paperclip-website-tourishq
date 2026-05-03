@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tourishq Operations Dashboard</title>
+    <meta name="robots" content="noindex, nofollow">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" type="image/svg+xml" href="../images/tourishq-icon.svg">
+
+    <style>
+        body { font-family: 'Manrope', sans-serif; background: #111; color: #fff; }
+        h1,h2,h3,h4,h5 { font-family: 'Montserrat', sans-serif; font-weight: 700; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #1a1a1a; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+
+        /* Tab active */
+        .tab-btn.active { background: #009E83; color: #fff; border-color: #009E83; }
+
+        /* Table */
+        table { border-collapse: collapse; width: 100%; }
+        th { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #6b7280; padding: 10px 12px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.07); white-space: nowrap; }
+        td { padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 0.85rem; vertical-align: middle; }
+        tr:hover td { background: rgba(255,255,255,0.02); }
+
+        /* Status badges */
+        .status-new { background: rgba(59,130,246,0.2); color: #60a5fa; }
+        .status-contacted { background: rgba(234,179,8,0.2); color: #facc15; }
+        .status-quoted { background: rgba(168,85,247,0.2); color: #c084fc; }
+        .status-closed { background: rgba(34,197,94,0.2); color: #4ade80; }
+        .status-confirmed { background: rgba(34,197,94,0.2); color: #4ade80; }
+        .status-pending { background: rgba(234,179,8,0.2); color: #facc15; }
+        .status-completed { background: rgba(107,114,128,0.2); color: #9ca3af; }
+        .status-cancelled { background: rgba(239,68,68,0.2); color: #f87171; }
+        .status-active { background: rgba(34,197,94,0.2); color: #4ade80; }
+        .status-inactive { background: rgba(107,114,128,0.2); color: #9ca3af; }
+
+        /* Modal */
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); z-index: 100; align-items: center; justify-content: center; padding: 1rem; }
+        .modal-overlay.open { display: flex; }
+
+        /* Auth screen */
+        #auth-screen { position: fixed; inset: 0; background: #111; z-index: 200; display: flex; align-items: center; justify-content: center; }
+        #auth-screen.hidden { display: none; }
+
+        /* Shake animation */
+        @keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-8px)} 40%{transform:translateX(8px)} 60%{transform:translateX(-6px)} 80%{transform:translateX(6px)} }
+        .shake { animation: shake 0.4s ease; }
+
+        /* Editable inline */
+        [contenteditable] { outline: none; cursor: text; border-radius: 4px; padding: 2px 4px; }
+        [contenteditable]:focus { background: rgba(0,158,131,0.1); box-shadow: 0 0 0 1px #009E83; }
+
+        select { background: #2a2a2a; border: 1px solid rgba(255,255,255,0.1); color: #fff; border-radius: 6px; padding: 4px 8px; font-size: 0.8rem; }
+    </style>
+</head>
+
+<body>
+
+<!-- AUTH SCREEN -->
+<div id="auth-screen">
+    <div class="text-center max-w-sm w-full mx-auto px-4">
+        <div class="w-16 h-16 bg-[#009E83]/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-lock text-[#009E83] text-2xl"></i>
+        </div>
+        <h1 class="text-2xl font-black text-white mb-1" style="font-family:'Montserrat',sans-serif;">Operations Dashboard</h1>
+        <p class="text-gray-400 text-sm mb-8">Tourishq Travel Solutions — Internal Tool</p>
+        <div class="bg-[#1a1a1a] border border-white/10 rounded-2xl p-6">
+            <div class="mb-4">
+                <label class="block text-xs font-bold text-gray-400 uppercase tracking-wide mb-2">Access Password</label>
+                <input
+                    id="auth-input"
+                    type="password"
+                    placeholder="Enter password"
+                    autocomplete="current-password"
+                    class="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder-gray-500 text-sm focus:outline-none focus:ring-2 focus:ring-[#009E83] transition-all"
+                >
+                <p id="auth-error" class="text-red-400 text-xs mt-2 hidden">Incorrect password. Please try again.</p>
+            </div>
+            <button id="auth-submit" class="w-full bg-[#009E83] hover:bg-[#007a66] text-white font-bold py-3 rounded-xl transition-all">
+                <i class="fas fa-sign-in-alt mr-2"></i> Access Dashboard
+            </button>
+        </div>
+        <p class="text-gray-600 text-xs mt-4">Authorised personnel only. All activity is logged.</p>
+    </div>
+</div>
+
+<!-- MAIN DASHBOARD -->
+<div id="dashboard" class="hidden min-h-screen">
+
+    <!-- TOP NAV -->
+    <nav class="bg-[#1a1a1a] border-b border-white/10 sticky top-0 z-50">
+        <div class="max-w-full px-4 sm:px-6 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="../images/tourishq.svg" alt="Tourishq" class="h-8 w-auto" onerror="this.style.display='none'">
+                <span class="text-sm font-bold text-white hidden sm:block">Operations Dashboard</span>
+                <span class="text-xs text-gray-500 hidden sm:block">v1.0</span>
+            </div>
+            <div class="flex items-center gap-3">
+                <span id="current-date" class="text-xs text-gray-400 hidden sm:block"></span>
+                <button onclick="exportCurrentTab()" class="text-xs font-bold border border-white/20 text-gray-300 hover:border-[#009E83] hover:text-[#009E83] px-3 py-1.5 rounded-lg transition-all">
+                    <i class="fas fa-download mr-1"></i> Export CSV
+                </button>
+                <button id="logout-btn" class="text-xs text-gray-400 hover:text-red-400 transition-colors px-2 py-1.5">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- TABS -->
+    <div class="bg-[#1a1a1a] border-b border-white/10 px-4 sm:px-6 flex gap-1 overflow-x-auto">
+        <button class="tab-btn active text-xs font-bold border border-transparent text-gray-300 px-4 py-2.5 rounded-t-lg whitespace-nowrap transition-all" data-tab="enquiries">
+            <i class="fas fa-inbox mr-1.5"></i> Enquiries
+            <span id="tab-badge-enquiries" class="ml-1.5 text-[10px] bg-[#009E83]/30 text-[#009E83] px-1.5 py-0.5 rounded-full"></span>
+        </button>
+        <button class="tab-btn text-xs font-bold border border-transparent text-gray-300 px-4 py-2.5 rounded-t-lg whitespace-nowrap transition-all" data-tab="bookings">
+            <i class="fas fa-calendar-check mr-1.5"></i> Bookings
+            <span id="tab-badge-bookings" class="ml-1.5 text-[10px] bg-[#009E83]/30 text-[#009E83] px-1.5 py-0.5 rounded-full"></span>
+        </button>
+        <button class="tab-btn text-xs font-bold border border-transparent text-gray-300 px-4 py-2.5 rounded-t-lg whitespace-nowrap transition-all" data-tab="vendors">
+            <i class="fas fa-handshake mr-1.5"></i> Vendors
+        </button>
+        <button class="tab-btn text-xs font-bold border border-transparent text-gray-300 px-4 py-2.5 rounded-t-lg whitespace-nowrap transition-all" data-tab="reports">
+            <i class="fas fa-chart-bar mr-1.5"></i> Reports
+        </button>
+    </div>
+
+    <!-- TAB CONTENT -->
+    <div class="p-4 sm:p-6">
+
+        <!-- ENQUIRIES TAB -->
+        <div id="tab-enquiries" class="tab-content">
+            <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                <h2 class="text-lg font-black text-white">Enquiries</h2>
+                <button onclick="openModal('enquiry')" class="inline-flex items-center gap-2 bg-[#009E83] hover:bg-[#007a66] text-white font-bold text-sm px-4 py-2 rounded-lg transition-all">
+                    <i class="fas fa-plus"></i> New Enquiry
+                </button>
+            </div>
+            <div class="bg-[#1a1a1a] border border-white/10 rounded-xl overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table id="enquiries-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                                <th>Destination</th>
+                                <th>Budget</th>
+                                <th>Status</th>
+                                <th>Notes</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="enquiries-body">
+                            <!-- Rendered by JS -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="enquiries-empty" class="hidden text-center py-12 text-gray-500">
+                    <i class="fas fa-inbox text-3xl mb-3"></i>
+                    <p>No enquiries yet. New enquiries from the website form will appear here.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- BOOKINGS TAB -->
+        <div id="tab-bookings" class="tab-content hidden">
+            <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                <h2 class="text-lg font-black text-white">Bookings</h2>
+                <button onclick="openModal('booking')" class="inline-flex items-center gap-2 bg-[#009E83] hover:bg-[#007a66] text-white font-bold text-sm px-4 py-2 rounded-lg transition-all">
+                    <i class="fas fa-plus"></i> New Booking
+                </button>
+            </div>
+            <div class="bg-[#1a1a1a] border border-white/10 rounded-xl overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table id="bookings-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Customer</th>
+                                <th>Phone</th>
+                                <th>Destination</th>
+                                <th>Package</th>
+                                <th>Travel Date</th>
+                                <th>Pax</th>
+                                <th>Amount (₹)</th>
+                                <th>Status</th>
+                                <th>Notes</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bookings-body"></tbody>
+                    </table>
+                </div>
+                <div id="bookings-empty" class="hidden text-center py-12 text-gray-500">
+                    <i class="fas fa-calendar text-3xl mb-3"></i>
+                    <p>No bookings yet. Convert an enquiry to a booking above.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- VENDORS TAB -->
+        <div id="tab-vendors" class="tab-content hidden">
+            <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                <h2 class="text-lg font-black text-white">Vendors</h2>
+                <button onclick="openModal('vendor')" class="inline-flex items-center gap-2 bg-[#009E83] hover:bg-[#007a66] text-white font-bold text-sm px-4 py-2 rounded-lg transition-all">
+                    <i class="fas fa-plus"></i> Add Vendor
+                </button>
+            </div>
+            <div class="bg-[#1a1a1a] border border-white/10 rounded-xl overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table id="vendors-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Destination</th>
+                                <th>Contact</th>
+                                <th>Commission %</th>
+                                <th>Status</th>
+                                <th>Notes</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="vendors-body"></tbody>
+                    </table>
+                </div>
+                <div id="vendors-empty" class="hidden text-center py-12 text-gray-500">
+                    <i class="fas fa-handshake text-3xl mb-3"></i>
+                    <p>No vendors yet. Add hotels, transport, guides, and operators here.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- REPORTS TAB -->
+        <div id="tab-reports" class="tab-content hidden">
+            <h2 class="text-lg font-black text-white mb-6">Business Reports</h2>
+
+            <!-- Summary Cards -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
+                <div class="bg-[#1a1a1a] border border-white/10 rounded-xl p-4">
+                    <p class="text-xs text-gray-500 uppercase tracking-wide font-bold mb-1">Total Enquiries</p>
+                    <p id="stat-total-enquiries" class="text-3xl font-black text-white">0</p>
+                </div>
+                <div class="bg-[#1a1a1a] border border-white/10 rounded-xl p-4">
+                    <p class="text-xs text-gray-500 uppercase tracking-wide font-bold mb-1">This Month</p>
+                    <p id="stat-this-month" class="text-3xl font-black text-[#009E83]">0</p>
+                </div>
+                <div class="bg-[#1a1a1a] border border-white/10 rounded-xl p-4">
+                    <p class="text-xs text-gray-500 uppercase tracking-wide font-bold mb-1">Total Bookings</p>
+                    <p id="stat-total-bookings" class="text-3xl font-black text-white">0</p>
+                </div>
+                <div class="bg-[#1a1a1a] border border-white/10 rounded-xl p-4">
+                    <p class="text-xs text-gray-500 uppercase tracking-wide font-bold mb-1">Confirmed</p>
+                    <p id="stat-confirmed" class="text-3xl font-black text-[#4ade80]">0</p>
+                </div>
+                <div class="bg-[#1a1a1a] border border-[#FFBC00]/30 rounded-xl p-4">
+                    <p class="text-xs text-gray-500 uppercase tracking-wide font-bold mb-1">Est. Revenue</p>
+                    <p id="stat-revenue" class="text-2xl font-black text-[#FFBC00]">₹0</p>
+                </div>
+                <div class="bg-[#1a1a1a] border border-white/10 rounded-xl p-4">
+                    <p class="text-xs text-gray-500 uppercase tracking-wide font-bold mb-1">Conversion</p>
+                    <p id="stat-conversion" class="text-3xl font-black text-white">0%</p>
+                </div>
+            </div>
+
+            <!-- Enquiry Status Breakdown -->
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-[#1a1a1a] border border-white/10 rounded-xl p-5">
+                    <h3 class="font-bold text-white mb-4 text-sm uppercase tracking-wide">Enquiry Status Breakdown</h3>
+                    <div id="enquiry-status-breakdown" class="space-y-3"></div>
+                </div>
+                <div class="bg-[#1a1a1a] border border-white/10 rounded-xl p-5">
+                    <h3 class="font-bold text-white mb-4 text-sm uppercase tracking-wide">Top Destinations (Enquiries)</h3>
+                    <div id="top-destinations" class="space-y-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODALS -->
+
+<!-- Enquiry Modal -->
+<div id="modal-enquiry" class="modal-overlay">
+    <div class="bg-[#1a1a1a] border border-white/10 rounded-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto p-6">
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="font-black text-white text-lg">New Enquiry</h3>
+            <button onclick="closeModal('enquiry')" class="w-8 h-8 bg-white/5 hover:bg-white/10 rounded-full flex items-center justify-center text-gray-400 hover:text-white transition-all">
+                <i class="fas fa-times text-sm"></i>
+            </button>
+        </div>
+        <form id="enquiry-form" class="space-y-3">
+            <div class="grid grid-cols-2 gap-3">
+                <div><label class="field-label">Name *</label><input type="text" name="name" required class="field-input"></div>
+                <div><label class="field-label">Phone *</label><input type="tel" name="phone" required class="field-input"></div>
+            </div>
+            <div><label class="field-label">Email</label><input type="email" name="email" class="field-input"></div>
+            <div class="grid grid-cols-2 gap-3">
+                <div><label class="field-label">Destination</label><input type="text" name="destination" class="field-input" placeholder="e.g. Bali"></div>
+                <div><label class="field-label">Budget</label><input type="text" name="budget" class="field-input" placeholder="e.g. ₹40,000"></div>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+                <div><label class="field-label">Travel Date</label><input type="date" name="travel_date" class="field-input" style="color-scheme:dark;"></div>
+                <div><label class="field-label">Group Size</label><input type="number" name="group_size" class="field-input" min="1" placeholder="2"></div>
+            </div>
+            <div>
+                <label class="field-label">Source</label>
+                <select name="source" class="field-input w-full">
+                    <option value="Website">Website</option>
+                    <option value="WhatsApp">WhatsApp</option>
+                    <option value="Phone">Phone Call</option>
+                    <option value="Instagram">Instagram</option>
+                    <option value="Referral">Referral</option>
+                    <option value="Walk-in">Walk-in</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div><label class="field-label">Notes</label><textarea name="notes" rows="2" class="field-input resize-none" placeholder="Any additional notes..."></textarea></div>
+            <button type="submit" class="w-full bg-[#009E83] hover:bg-[#007a66] text-white font-bold py-3 rounded-xl transition-all mt-2">
+                <i class="fas fa-plus mr-2"></i> Add Enquiry
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- Booking Modal -->
+<div id="modal-booking" class="modal-overlay">
+    <div class="bg-[#1a1a1a] border border-white/10 rounded-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto p-6">
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="font-black text-white text-lg">New Booking</h3>
+            <button onclick="closeModal('booking')" class="w-8 h-8 bg-white/5 hover:bg-white/10 rounded-full flex items-center justify-center text-gray-400 hover:text-white transition-all">
+                <i class="fas fa-times text-sm"></i>
+            </button>
+        </div>
+        <form id="booking-form" class="space-y-3">
+            <div class="grid grid-cols-2 gap-3">
+                <div><label class="field-label">Customer Name *</label><input type="text" name="name" required class="field-input"></div>
+                <div><label class="field-label">Phone *</label><input type="tel" name="phone" required class="field-input"></div>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+                <div><label class="field-label">Destination</label><input type="text" name="destination" class="field-input"></div>
+                <div><label class="field-label">Package</label><input type="text" name="package" class="field-input" placeholder="e.g. Royal Rajasthan Circuit"></div>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+                <div><label class="field-label">Travel Date</label><input type="date" name="travel_date" class="field-input" style="color-scheme:dark;"></div>
+                <div><label class="field-label">Group Size (Pax)</label><input type="number" name="group_size" class="field-input" min="1"></div>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+                <div><label class="field-label">Amount (₹)</label><input type="number" name="amount" class="field-input" placeholder="50000"></div>
+                <div>
+                    <label class="field-label">Status</label>
+                    <select name="status" class="field-input w-full">
+                        <option value="Pending">Pending</option>
+                        <option value="Confirmed">Confirmed</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+                </div>
+            </div>
+            <div><label class="field-label">Notes</label><textarea name="notes" rows="2" class="field-input resize-none"></textarea></div>
+            <button type="submit" class="w-full bg-[#009E83] hover:bg-[#007a66] text-white font-bold py-3 rounded-xl transition-all mt-2">
+                <i class="fas fa-plus mr-2"></i> Add Booking
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- Vendor Modal -->
+<div id="modal-vendor" class="modal-overlay">
+    <div class="bg-[#1a1a1a] border border-white/10 rounded-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto p-6">
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="font-black text-white text-lg">Add Vendor</h3>
+            <button onclick="closeModal('vendor')" class="w-8 h-8 bg-white/5 hover:bg-white/10 rounded-full flex items-center justify-center text-gray-400 hover:text-white transition-all">
+                <i class="fas fa-times text-sm"></i>
+            </button>
+        </div>
+        <form id="vendor-form" class="space-y-3">
+            <div><label class="field-label">Vendor Name *</label><input type="text" name="name" required class="field-input" placeholder="e.g. Rambagh Palace Hotel"></div>
+            <div class="grid grid-cols-2 gap-3">
+                <div>
+                    <label class="field-label">Type</label>
+                    <select name="type" class="field-input w-full">
+                        <option value="Hotel">Hotel</option>
+                        <option value="Transport">Transport</option>
+                        <option value="Guide">Guide</option>
+                        <option value="Activity">Activity</option>
+                        <option value="Restaurant">Restaurant</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div><label class="field-label">Destination</label><input type="text" name="destination" class="field-input" placeholder="e.g. Jaipur"></div>
+            </div>
+            <div><label class="field-label">Contact (Phone/Email)</label><input type="text" name="contact" class="field-input"></div>
+            <div class="grid grid-cols-2 gap-3">
+                <div><label class="field-label">Commission %</label><input type="number" name="commission" class="field-input" min="0" max="100" placeholder="10"></div>
+                <div>
+                    <label class="field-label">Status</label>
+                    <select name="status" class="field-input w-full">
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                    </select>
+                </div>
+            </div>
+            <div><label class="field-label">Notes</label><textarea name="notes" rows="2" class="field-input resize-none" placeholder="Contract terms, special rates, etc."></textarea></div>
+            <button type="submit" class="w-full bg-[#009E83] hover:bg-[#007a66] text-white font-bold py-3 rounded-xl transition-all mt-2">
+                <i class="fas fa-plus mr-2"></i> Add Vendor
+            </button>
+        </form>
+    </div>
+</div>
+
+<style>
+.field-label { display: block; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #6b7280; margin-bottom: 4px; }
+.field-input { display: block; width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 8px 12px; color: #fff; font-size: 0.85rem; transition: all 0.2s; }
+.field-input:focus { outline: none; border-color: #009E83; box-shadow: 0 0 0 1px #009E83; }
+</style>
+
+<script>
+// ============================
+// STATE
+// ============================
+const STORAGE = { enquiries: 'ops_enquiries', bookings: 'ops_bookings', vendors: 'ops_vendors' };
+const PASSWORD = 'tourishq2024';
+
+function load(key) { try { return JSON.parse(localStorage.getItem(STORAGE[key]) || '[]'); } catch { return []; } }
+function save(key, data) { localStorage.setItem(STORAGE[key], JSON.stringify(data)); }
+function genId() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+function today() { return new Date().toISOString().split('T')[0]; }
+
+// ============================
+// AUTH
+// ============================
+(function initAuth() {
+    const authScreen = document.getElementById('auth-screen');
+    const dashboard = document.getElementById('dashboard');
+
+    if (localStorage.getItem('ops_auth') === PASSWORD) {
+        authScreen.classList.add('hidden');
+        dashboard.classList.remove('hidden');
+        initDashboard();
+        return;
+    }
+
+    const input = document.getElementById('auth-input');
+    const submit = document.getElementById('auth-submit');
+    const error = document.getElementById('auth-error');
+
+    const attempt = () => {
+        if (input.value === PASSWORD) {
+            localStorage.setItem('ops_auth', PASSWORD);
+            authScreen.classList.add('hidden');
+            dashboard.classList.remove('hidden');
+            initDashboard();
+        } else {
+            error.classList.remove('hidden');
+            input.classList.add('shake');
+            input.value = '';
+            setTimeout(() => input.classList.remove('shake'), 500);
+            setTimeout(() => input.focus(), 100);
+        }
+    };
+
+    submit.addEventListener('click', attempt);
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') attempt(); });
+    input.focus();
+})();
+
+// ============================
+// DASHBOARD INIT
+// ============================
+function initDashboard() {
+    document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+    // Tab switching
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+            btn.classList.add('active');
+            document.getElementById(`tab-${btn.dataset.tab}`).classList.remove('hidden');
+            if (btn.dataset.tab === 'reports') renderReports();
+        });
+    });
+
+    // Logout
+    document.getElementById('logout-btn').addEventListener('click', () => {
+        if (confirm('Log out of Operations Dashboard?')) {
+            localStorage.removeItem('ops_auth');
+            location.reload();
+        }
+    });
+
+    // Forms
+    document.getElementById('enquiry-form').addEventListener('submit', e => {
+        e.preventDefault();
+        const fd = new FormData(e.target);
+        const data = load('enquiries');
+        data.unshift({
+            id: genId(), date: today(),
+            name: fd.get('name'), phone: fd.get('phone'), email: fd.get('email') || '',
+            destination: fd.get('destination') || '', budget: fd.get('budget') || '',
+            travel_date: fd.get('travel_date') || '', group_size: fd.get('group_size') || '',
+            source: fd.get('source') || 'Website', status: 'New', notes: fd.get('notes') || ''
+        });
+        save('enquiries', data);
+        e.target.reset();
+        closeModal('enquiry');
+        renderEnquiries();
+    });
+
+    document.getElementById('booking-form').addEventListener('submit', e => {
+        e.preventDefault();
+        const fd = new FormData(e.target);
+        const data = load('bookings');
+        data.unshift({
+            id: genId(), date: today(),
+            name: fd.get('name'), phone: fd.get('phone'),
+            destination: fd.get('destination') || '', package: fd.get('package') || '',
+            travel_date: fd.get('travel_date') || '', group_size: fd.get('group_size') || '',
+            amount: fd.get('amount') || '0', status: fd.get('status') || 'Pending',
+            notes: fd.get('notes') || ''
+        });
+        save('bookings', data);
+        e.target.reset();
+        closeModal('booking');
+        renderBookings();
+    });
+
+    document.getElementById('vendor-form').addEventListener('submit', e => {
+        e.preventDefault();
+        const fd = new FormData(e.target);
+        const data = load('vendors');
+        data.push({
+            id: genId(), name: fd.get('name'), type: fd.get('type') || 'Hotel',
+            destination: fd.get('destination') || '', contact: fd.get('contact') || '',
+            commission: fd.get('commission') || '0', status: fd.get('status') || 'Active',
+            notes: fd.get('notes') || ''
+        });
+        save('vendors', data);
+        e.target.reset();
+        closeModal('vendor');
+        renderVendors();
+    });
+
+    renderEnquiries();
+    renderBookings();
+    renderVendors();
+    updateBadges();
+}
+
+// ============================
+// RENDER FUNCTIONS
+// ============================
+function statusBadge(status) {
+    const cls = `status-${status.toLowerCase().replace(/\s+/g,'-')}`;
+    return `<span class="text-xs font-bold px-2 py-0.5 rounded-full ${cls}">${status}</span>`;
+}
+
+function renderEnquiries() {
+    const data = load('enquiries');
+    const tbody = document.getElementById('enquiries-body');
+    const empty = document.getElementById('enquiries-empty');
+
+    if (!data.length) { tbody.innerHTML = ''; empty.classList.remove('hidden'); return; }
+    empty.classList.add('hidden');
+
+    const statuses = ['New', 'Contacted', 'Quoted', 'Closed'];
+    tbody.innerHTML = data.map(row => `
+        <tr data-id="${row.id}">
+            <td class="text-xs text-gray-400">${row.date}</td>
+            <td class="font-semibold text-white">${esc(row.name)}</td>
+            <td><a href="tel:${row.phone}" class="text-[#009E83] hover:underline">${esc(row.phone)}</a></td>
+            <td class="text-xs text-gray-400">${esc(row.email)}</td>
+            <td>${esc(row.destination)}</td>
+            <td class="text-xs text-gray-400">${esc(row.budget)}</td>
+            <td>
+                <select class="status-select text-xs" data-type="enquiries" data-id="${row.id}">
+                    ${statuses.map(s => `<option${s===row.status?' selected':''}>${s}</option>`).join('')}
+                </select>
+            </td>
+            <td><span contenteditable="true" class="notes-edit text-xs text-gray-400" data-type="enquiries" data-id="${row.id}">${esc(row.notes)}</span></td>
+            <td>
+                <button onclick="deleteRow('enquiries','${row.id}')" class="text-red-400 hover:text-red-300 text-xs p-1 transition-colors">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </td>
+        </tr>`).join('');
+
+    wireTableEvents('enquiries');
+    updateBadges();
+}
+
+function renderBookings() {
+    const data = load('bookings');
+    const tbody = document.getElementById('bookings-body');
+    const empty = document.getElementById('bookings-empty');
+
+    if (!data.length) { tbody.innerHTML = ''; empty.classList.remove('hidden'); return; }
+    empty.classList.add('hidden');
+
+    const statuses = ['Pending', 'Confirmed', 'Completed', 'Cancelled'];
+    tbody.innerHTML = data.map(row => `
+        <tr data-id="${row.id}">
+            <td class="text-xs text-gray-400">${row.date}</td>
+            <td class="font-semibold text-white">${esc(row.name)}</td>
+            <td><a href="tel:${row.phone}" class="text-[#009E83] hover:underline">${esc(row.phone)}</a></td>
+            <td>${esc(row.destination)}</td>
+            <td class="text-xs text-gray-400 max-w-[140px] truncate" title="${esc(row.package)}">${esc(row.package)}</td>
+            <td class="text-xs text-gray-400">${row.travel_date || '–'}</td>
+            <td class="text-center">${esc(row.group_size) || '–'}</td>
+            <td class="font-bold text-white">₹${parseInt(row.amount||0).toLocaleString('en-IN')}</td>
+            <td>
+                <select class="status-select text-xs" data-type="bookings" data-id="${row.id}">
+                    ${statuses.map(s => `<option${s===row.status?' selected':''}>${s}</option>`).join('')}
+                </select>
+            </td>
+            <td><span contenteditable="true" class="notes-edit text-xs text-gray-400" data-type="bookings" data-id="${row.id}">${esc(row.notes)}</span></td>
+            <td>
+                <button onclick="deleteRow('bookings','${row.id}')" class="text-red-400 hover:text-red-300 text-xs p-1 transition-colors">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </td>
+        </tr>`).join('');
+
+    wireTableEvents('bookings');
+    updateBadges();
+}
+
+function renderVendors() {
+    const data = load('vendors');
+    const tbody = document.getElementById('vendors-body');
+    const empty = document.getElementById('vendors-empty');
+
+    if (!data.length) { tbody.innerHTML = ''; empty.classList.remove('hidden'); return; }
+    empty.classList.add('hidden');
+
+    const statuses = ['Active', 'Inactive'];
+    tbody.innerHTML = data.map(row => `
+        <tr data-id="${row.id}">
+            <td class="font-semibold text-white">${esc(row.name)}</td>
+            <td><span class="text-xs bg-white/5 border border-white/10 px-2 py-0.5 rounded-full">${esc(row.type)}</span></td>
+            <td>${esc(row.destination)}</td>
+            <td class="text-xs text-[#009E83]">${esc(row.contact)}</td>
+            <td class="text-center">${esc(row.commission)}%</td>
+            <td>
+                <select class="status-select text-xs" data-type="vendors" data-id="${row.id}">
+                    ${statuses.map(s => `<option${s===row.status?' selected':''}>${s}</option>`).join('')}
+                </select>
+            </td>
+            <td><span contenteditable="true" class="notes-edit text-xs text-gray-400" data-type="vendors" data-id="${row.id}">${esc(row.notes)}</span></td>
+            <td>
+                <button onclick="deleteRow('vendors','${row.id}')" class="text-red-400 hover:text-red-300 text-xs p-1 transition-colors">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </td>
+        </tr>`).join('');
+
+    wireTableEvents('vendors');
+}
+
+function wireTableEvents(type) {
+    // Status dropdowns
+    document.querySelectorAll(`.status-select[data-type="${type}"]`).forEach(sel => {
+        sel.addEventListener('change', () => {
+            const data = load(type);
+            const row = data.find(r => r.id === sel.dataset.id);
+            if (row) { row.status = sel.value; save(type, data); }
+        });
+    });
+    // Inline notes editing
+    document.querySelectorAll(`.notes-edit[data-type="${type}"]`).forEach(el => {
+        el.addEventListener('blur', () => {
+            const data = load(type);
+            const row = data.find(r => r.id === el.dataset.id);
+            if (row) { row.notes = el.textContent; save(type, data); }
+        });
+    });
+}
+
+function renderReports() {
+    const enquiries = load('enquiries');
+    const bookings = load('bookings');
+
+    const thisMonth = new Date().toISOString().slice(0, 7);
+    const thisMonthCount = enquiries.filter(e => e.date.startsWith(thisMonth)).length;
+    const confirmed = bookings.filter(b => b.status === 'Confirmed' || b.status === 'Completed');
+    const revenue = confirmed.reduce((s, b) => s + (parseInt(b.amount) || 0), 0);
+    const conversion = enquiries.length ? Math.round((bookings.filter(b=>b.status!=='Cancelled').length / enquiries.length) * 100) : 0;
+
+    document.getElementById('stat-total-enquiries').textContent = enquiries.length;
+    document.getElementById('stat-this-month').textContent = thisMonthCount;
+    document.getElementById('stat-total-bookings').textContent = bookings.length;
+    document.getElementById('stat-confirmed').textContent = confirmed.length;
+    document.getElementById('stat-revenue').textContent = '₹' + revenue.toLocaleString('en-IN');
+    document.getElementById('stat-conversion').textContent = conversion + '%';
+
+    // Status breakdown
+    const statusCounts = {};
+    enquiries.forEach(e => { statusCounts[e.status] = (statusCounts[e.status]||0) + 1; });
+    const breakdown = document.getElementById('enquiry-status-breakdown');
+    breakdown.innerHTML = Object.entries(statusCounts).sort((a,b)=>b[1]-a[1]).map(([s, c]) => `
+        <div class="flex items-center justify-between">
+            ${statusBadge(s)}
+            <div class="flex items-center gap-2">
+                <div class="w-24 bg-white/10 rounded-full h-1.5">
+                    <div class="bg-[#009E83] h-1.5 rounded-full" style="width:${enquiries.length ? (c/enquiries.length*100) : 0}%"></div>
+                </div>
+                <span class="text-sm font-bold text-white w-6 text-right">${c}</span>
+            </div>
+        </div>`).join('') || '<p class="text-gray-500 text-sm">No enquiry data yet.</p>';
+
+    // Top destinations
+    const destCounts = {};
+    enquiries.forEach(e => { if (e.destination) destCounts[e.destination] = (destCounts[e.destination]||0) + 1; });
+    const top = document.getElementById('top-destinations');
+    const topDests = Object.entries(destCounts).sort((a,b)=>b[1]-a[1]).slice(0, 8);
+    top.innerHTML = topDests.map(([d, c]) => `
+        <div class="flex items-center justify-between">
+            <span class="text-sm text-white font-medium">${esc(d)}</span>
+            <div class="flex items-center gap-2">
+                <div class="w-24 bg-white/10 rounded-full h-1.5">
+                    <div class="bg-[#FFBC00] h-1.5 rounded-full" style="width:${topDests[0]?c/topDests[0][1]*100:0}%"></div>
+                </div>
+                <span class="text-sm font-bold text-white w-4 text-right">${c}</span>
+            </div>
+        </div>`).join('') || '<p class="text-gray-500 text-sm">No destination data yet.</p>';
+}
+
+function updateBadges() {
+    const eq = load('enquiries').filter(e => e.status === 'New').length;
+    const bk = load('bookings').filter(b => b.status === 'Pending').length;
+    const eqBadge = document.getElementById('tab-badge-enquiries');
+    const bkBadge = document.getElementById('tab-badge-bookings');
+    if (eqBadge) eqBadge.textContent = eq || '';
+    if (bkBadge) bkBadge.textContent = bk || '';
+}
+
+// ============================
+// ACTIONS
+// ============================
+function deleteRow(type, id) {
+    if (!confirm('Delete this record?')) return;
+    const data = load(type).filter(r => r.id !== id);
+    save(type, data);
+    if (type === 'enquiries') renderEnquiries();
+    if (type === 'bookings') renderBookings();
+    if (type === 'vendors') renderVendors();
+}
+
+function openModal(type) { document.getElementById(`modal-${type}`).classList.add('open'); }
+function closeModal(type) { document.getElementById(`modal-${type}`).classList.remove('open'); }
+
+// Close modals on backdrop click
+document.querySelectorAll('.modal-overlay').forEach(m => {
+    m.addEventListener('click', e => { if (e.target === m) m.classList.remove('open'); });
+});
+
+// ============================
+// CSV EXPORT
+// ============================
+function exportCurrentTab() {
+    const active = document.querySelector('.tab-btn.active');
+    const tab = active ? active.dataset.tab : 'enquiries';
+    if (tab === 'reports') { alert('Switch to Enquiries, Bookings, or Vendors to export that data.'); return; }
+    const data = load(tab);
+    if (!data.length) { alert('No data to export.'); return; }
+    exportToCSV(data, `tourishq-${tab}-${today()}.csv`);
+}
+
+function exportToCSV(data, filename) {
+    if (!data.length) return;
+    const headers = Object.keys(data[0]);
+    const rows = [headers, ...data.map(r => headers.map(h => JSON.stringify(r[h] ?? '')))];
+    const csv = rows.map(r => r.join(',')).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = filename; a.click();
+    URL.revokeObjectURL(url);
+}
+
+function esc(str) {
+    return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// Window export helper
+window.exportCurrentTab = exportCurrentTab;
+window.openModal = openModal;
+window.closeModal = closeModal;
+window.deleteRow = deleteRow;
+</script>
+</body>
+</html>

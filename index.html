@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tourishq Travel Solutions">
+    <meta name="keywords" content="travel">
+    <title>Tourishq Travel Solutions</title>
+
+    <link rel="icon" type="image/svg+xml" href="images/tourishq-icon.svg">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&family=Montserrat:wght@400;700;900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* --- BASE STYLES --- */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            font-size: 0.95rem;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .primary-bg {
+            background-color: #009E83;
+        }
+
+        .secondary-bg {
+            background-color: #FFBC00;
+        }
+
+        .secondary-text {
+            color: #FFBC00;
+        }
+
+        /* --- BUTTONS --- */
+        .btn-primary {
+            background-color: #009E83;
+            color: white;
+            font-weight: 600;
+            padding: 10px 24px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #007a66;
+            transform: translateY(-2px);
+        }
+
+        /* --- NATIVE CSS SLIDER (High Performance) --- */
+        .scrolling-wrapper {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            gap: 1.5rem;
+            padding-bottom: 2rem;
+            scrollbar-width: none;
+        }
+
+        .scrolling-wrapper::-webkit-scrollbar {
+            display: none;
+        }
+
+        .scrolling-card {
+            flex: 0 0 auto;
+            width: 85%;
+            /* Mobile */
+            scroll-snap-align: start;
+        }
+
+        @media (min-width: 640px) {
+            .scrolling-card {
+                width: 45%;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .scrolling-card {
+                width: 30%;
+            }
+        }
+
+        @media (min-width: 1280px) {
+            .scrolling-card {
+                width: 24%;
+            }
+        }
+
+        /* --- DESTINATION CARD STYLES (from Travel-Web-Component repo) --- */
+        .dest-card {
+            position: relative;
+            width: 100%;
+            height: 320px;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            display: block;
+            text-decoration: none;
+        }
+
+        .dest-card-img-wrap {
+            position: absolute;
+            inset: 0;
+            transition: transform 0.5s ease-out;
+            transform-origin: center;
+        }
+        .dest-card:hover .dest-card-img-wrap { transform: scale(1.1); }
+        .dest-card-img-wrap img {
+            width: 100%; height: 100%; object-fit: cover;
+        }
+
+        .dest-overlay {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 2;
+            background: linear-gradient(to top,
+                rgba(0,0,0,0.95) 0%,
+                rgba(0,0,0,0.7) 15%,
+                rgba(0,0,0,0.45) 35%,
+                rgba(0,0,0,0.15) 55%,
+                transparent 70%
+            );
+            transition: opacity 0.5s ease-out;
+        }
+
+        .dest-card-content {
+            position: absolute;
+            inset: 0;
+            padding: 24px;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            text-align: center;
+        }
+
+        .dest-card-name {
+            position: absolute;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            white-space: nowrap;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+            transition: bottom 0.5s ease-out, top 0.5s ease-out;
+            width: max-content;
+            max-width: calc(100% - 32px);
+        }
+        .dest-card:hover .dest-card-name {
+            bottom: auto;
+            top: 24px;
+        }
+
+        .dest-card-hover {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            text-align: center;
+            padding: 0 8px;
+        }
+        .dest-card:hover .dest-card-hover { opacity: 1; }
+
+        .dest-card-hover-tag {
+            display: inline-block;
+            padding: 2px 12px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #fff;
+            background: rgba(0,158,131,0.8);
+            border-radius: 999px;
+            margin-bottom: 10px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        }
+        .dest-card-hover-desc {
+            font-size: 13px;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 12px;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+            max-width: 220px;
+            line-height: 1.4;
+        }
+        .dest-card-hover-link {
+            font-size: 13px;
+            font-weight: 600;
+            color: #FFBC00;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* --- SLIDER NAV BUTTONS --- */
+        .slider-nav-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .slider-nav-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #FFBC00;
+        }
+
+        /* --- SEARCH STYLES & SCROLLBAR FIX --- */
+        .brand-logo-filter {
+            filter: brightness(0) invert(1);
+            opacity: 0.7;
+        }
+
+        #search-lightbox.is-visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        #search-lightbox.is-visible>div {
+            transform: scale(1);
+        }
+
+        /* 1. Limit Height & Add Scroller */
+        .search-results-list {
+            max-height: 320px;
+            /* Fixed height limit */
+            overflow-y: auto;
+            /* Add scrollbar if content overflows */
+            padding-right: 8px;
+            /* Space for scrollbar */
+        }
+
+        /* 2. Custom Scrollbar Styling (Chrome/Safari/Edge) */
+        .search-results-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .search-results-list::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        .search-results-list::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+        }
+
+        .search-results-list::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Search Tags (Explicit CSS) */
+        .suggestion-tag {
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 0.2rem 0.6rem;
+            border-radius: 9999px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .tag-green {
+            background: rgba(34, 197, 94, 0.15);
+            color: #4ade80;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .tag-pink {
+            background: rgba(236, 72, 153, 0.15);
+            color: #f472b6;
+            border: 1px solid rgba(236, 72, 153, 0.3);
+        }
+
+        .tag-blue {
+            background: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .tag-yellow {
+            background: rgba(234, 179, 8, 0.15);
+            color: #facc15;
+            border: 1px solid rgba(234, 179, 8, 0.3);
+        }
+
+        .tag-purple {
+            background: rgba(168, 85, 247, 0.15);
+            color: #c084fc;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+        }
+
+        .tag-gray {
+            background: rgba(107, 114, 128, 0.15);
+            color: #d1d5db;
+            border: 1px solid rgba(107, 114, 128, 0.3);
+        }
+
+        .tag-orange {
+            background: rgba(249, 115, 22, 0.15);
+            color: #fb923c;
+            border: 1px solid rgba(249, 115, 22, 0.3);
+        }
+
+        .tag-red {
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .tag-cyan {
+            background: rgba(6, 182, 212, 0.15);
+            color: #22d3ee;
+            border: 1px solid rgba(6, 182, 212, 0.3);
+        }
+
+        .tag-teal {
+            background: rgba(20, 184, 166, 0.15);
+            color: #2dd4bf;
+            border: 1px solid rgba(20, 184, 166, 0.3);
+        }
+
+        /* Logo Slider Animation (CSS Only) */
+        @keyframes scroll-logos {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        @media (max-width: 767px) {
+            #brand-logos-container.is-animated {
+                display: flex;
+                width: max-content;
+                animation: scroll-logos 40s linear infinite;
+            }
+
+            #brand-logos-container.is-animated .logo-wrapper {
+                padding: 0 1.25rem;
+            }
+
+            #brand-slider-wrapper {
+                overflow: hidden;
+                mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+            }
+        }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://tourishq.com/#website",
+          "url": "https://tourishq.com/",
+          "name": "Tourishq Travel Solutions",
+          "description": "Empowering Travel Businesses | Enriching Traveler Experiences",
+          "publisher": {
+            "@id": "https://tourishq.com/#organization"
+          }
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://tourishq.com/#organization",
+          "name": "Tourishq Travel Solutions",
+          "url": "https://tourishq.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://tourishq.com/images/tourishq-icon.svg"
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+91-91167-94500",
+            "contactType": "customer service",
+            "areaServed": "IN",
+            "availableLanguage": "en"
+          },
+          "sameAs": [
+            "https://www.instagram.com/tourishq", 
+            "https://www.facebook.com/tourishq",
+            "https://www.linkedin.com/company/tourishq"
+          ]
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body class="overflow-x-hidden">
+
+    <div id="header-placeholder"></div>
+
+    <main>
+        <section id="hero-section-container"
+            class="relative w-full h-screen flex flex-col items-center justify-center text-center text-white p-4 overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-full bg-cover bg-center -z-10"></div>
+            <div class="absolute top-0 left-0 w-full h-full -z-9"
+                style="background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0, 0, 0, 0.903) 90%, #1a1a1a 100%);">
+            </div>
+
+            <div class="flex flex-col items-center max-w-4xl mx-auto z-10">
+                <span id="hero-badge"
+                    class="inline-block bg-white/10 backdrop-blur-sm text-xs md:text-sm px-4 py-1.5 rounded-full mb-4 border border-white/20"></span>
+                <h1 id="hero-title" class="text-4xl sm:text-5xl md:text-7xl font-black tracking-tight"
+                    style="text-shadow: 2px 2px 10px rgba(0,0,0,0.6);"></h1>
+                <p id="hero-subtitle" class="mt-4 max-w-lg text-gray-200 text-sm md:text-base"
+                    style="text-shadow: 1px 1px 5px rgba(0,0,0,0.7);"></p>
+
+                <div id="hero-search-trigger" class="mt-8 w-full max-w-2xl cursor-pointer">
+                    <div
+                        class="relative w-full bg-white/10 backdrop-blur-lg border border-white/25 rounded-full shadow-lg flex items-center p-2 group transition-all duration-300 hover:bg-white/20">
+                        <i class="fas fa-search text-white/70 mx-4"></i>
+                        <span class="text-white/80 flex-grow text-left">Search for a location...</span>
+                        <button
+                            class="bg-[#009E83] text-white font-bold py-2.5 px-8 rounded-full group-hover:bg-[#FFBC00] group-hover:text-black transition-colors duration-300">Search</button>
+                    </div>
+                </div>
+            </div>
+            <div id="brand-slider-wrapper"
+                class="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 w-full max-w-5xl px-0 md:px-4 z-10">
+                <div id="brand-logos-container" class="flex items-center justify-center flex-wrap gap-x-6 md:gap-x-12">
+                </div>
+            </div>
+        </section>
+
+        <section class="py-24 bg-[#1a1a1a] relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+                <div
+                    class="absolute -top-24 -left-24 w-96 h-96 bg-[#009E83] rounded-full mix-blend-screen filter blur-[128px] opacity-10">
+                </div>
+                <div
+                    class="absolute bottom-0 right-0 w-80 h-80 bg-[#FFBC00] rounded-full mix-blend-screen filter blur-[100px] opacity-5">
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+                    <div class="relative text-left max-w-2xl">
+                        <span
+                            class="inline-block py-1 px-3 rounded-full bg-[#009E83]/10 border border-[#009E83]/30 text-[#009E83] text-xs font-bold uppercase tracking-widest mb-4">
+                            Incredible India
+                        </span>
+
+                        <h2 class="text-4xl md:text-5xl font-black text-white leading-tight">
+                            Uncover <br>
+                            <span
+                                class="text-transparent bg-clip-text bg-gradient-to-r from-[#009E83] via-[#2dd4bf] to-[#FFBC00]">Indian
+                                Destinations</span>
+                        </h2>
+
+                        <p
+                            class="mt-6 text-lg text-gray-400 font-light leading-relaxed border-l-2 border-[#009E83] pl-4">
+                            Handpicked journeys to the country's most breathtaking landscapes. From the snowy peaks of
+                            the north to the tropical backwaters of the south.
+                        </p>
+                    </div>
+
+                    <div class="hidden md:flex gap-4">
+                        <button onclick="scrollSlider('popular-destinations-wrapper', 'left')"
+                            class="group w-14 h-14 rounded-full border border-white/10 bg-white/5 backdrop-blur-md flex items-center justify-center text-white hover:bg-[#009E83] hover:border-[#009E83] hover:scale-110 transition-all duration-300 shadow-lg">
+                            <i class="fas fa-arrow-left text-lg group-hover:-translate-x-1 transition-transform"></i>
+                        </button>
+                        <button onclick="scrollSlider('popular-destinations-wrapper', 'right')"
+                            class="group w-14 h-14 rounded-full border border-white/10 bg-white/5 backdrop-blur-md flex items-center justify-center text-white hover:bg-[#009E83] hover:border-[#009E83] hover:scale-110 transition-all duration-300 shadow-lg">
+                            <i class="fas fa-arrow-right text-lg group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="popular-destinations-wrapper" class="scrolling-wrapper pb-4"></div>
+            </div>
+        </section>
+
+        <section class="py-24 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div
+                    class="relative rounded-[3rem] overflow-hidden min-h-[500px] flex items-center group isolate shadow-2xl">
+
+                    <div class="absolute inset-0 bg-cover bg-center transition-transform duration-[2s] ease-out group-hover:scale-105"
+                        style="background-image: url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=2021&auto=format&fit=crop');">
+                    </div>
+
+                    <div class="absolute inset-0 bg-gradient-to-r from-black/95 via-black/60 to-transparent/30"></div>
+
+                    <div
+                        class="absolute right-[-10%] top-[-10%] w-[600px] h-[600px] bg-[url('images/tourishq-icon.svg')] bg-no-repeat bg-contain opacity-[0.03] rotate-12 pointer-events-none">
+                    </div>
+
+                    <div class="relative z-10 w-full grid lg:grid-cols-2 gap-12 p-8 md:p-20 items-center">
+
+                        <div class="text-left space-y-8">
+                            <div
+                                class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#FFBC00]/10 border border-[#FFBC00]/20 backdrop-blur-md">
+                                <span class="relative flex h-2 w-2">
+                                    <span
+                                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FFBC00] opacity-75"></span>
+                                    <span class="relative inline-flex rounded-full h-2 w-2 bg-[#FFBC00]"></span>
+                                </span>
+                                <span class="text-xs font-bold text-[#FFBC00] uppercase tracking-widest">Tailored For
+                                    You</span>
+                            </div>
+
+                            <h2 class="text-4xl md:text-6xl font-black text-white leading-[1.1]">
+                                Not sure where <br> to go <span
+                                    class="text-transparent bg-clip-text bg-gradient-to-r from-[#009E83] to-[#4ade80]">next?</span>
+                            </h2>
+
+                            <p class="text-lg text-gray-300 max-w-md leading-relaxed font-light">
+                                Our travel architects craft personalized itineraries based on your interests, budget,
+                                and dreams. No templates, just pure experience.
+                            </p>
+
+                            <div class="flex flex-wrap gap-4 pt-2">
+                                <a href="/contact"
+                                    class="btn-primary px-8 py-4 text-lg shadow-[0_0_20px_rgba(0,158,131,0.3)] hover:shadow-[0_0_30px_rgba(0,158,131,0.5)] transform hover:-translate-y-1 transition-all">
+                                    Get a Free Quote
+                                </a>
+                                <a href="tel:+919116794500"
+                                    class="group inline-flex items-center gap-3 px-8 py-4 rounded-xl border border-white/20 hover:bg-white hover:text-black text-white transition-all font-bold backdrop-blur-sm">
+                                    <i
+                                        class="fas fa-phone-alt group-hover:rotate-12 transition-transform text-[#009E83]"></i>
+                                    <span>Call Expert</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="relative hidden lg:block h-full min-h-[300px]">
+                            <div class="absolute top-0 right-10 w-72 bg-white/5 backdrop-blur-xl border border-white/10 p-5 rounded-2xl animate-float shadow-xl"
+                                style="animation-duration: 6s;">
+                                <div class="flex items-center gap-4">
+                                    <div
+                                        class="w-12 h-12 rounded-full bg-[#009E83] flex items-center justify-center text-white text-xl shadow-lg">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs text-gray-400 uppercase tracking-wide font-bold">Verified
+                                            Stays</p>
+                                        <p class="text-base font-bold text-white">Top-Rated Hotels</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="absolute bottom-10 left-10 w-80 bg-white/5 backdrop-blur-xl border border-white/10 p-5 rounded-2xl animate-float shadow-xl"
+                                style="animation-duration: 8s; animation-delay: 1s;">
+                                <div class="flex items-center gap-4">
+                                    <div
+                                        class="w-12 h-12 rounded-full bg-[#FFBC00] flex items-center justify-center text-black text-xl shadow-lg">
+                                        <i class="fas fa-headset"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs text-gray-400 uppercase tracking-wide font-bold">Always Here
+                                        </p>
+                                        <p class="text-base font-bold text-white">24/7 On-Trip Support</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-24 bg-[#0f0f0f] relative overflow-hidden">
+            <div class="absolute inset-0 w-full h-full pointer-events-none">
+                <div
+                    class="absolute bottom-0 left-0 w-96 h-96 bg-[#FFBC00] rounded-full mix-blend-screen filter blur-[150px] opacity-5">
+                </div>
+                <div
+                    class="absolute top-0 right-0 w-80 h-80 bg-[#009E83] rounded-full mix-blend-screen filter blur-[150px] opacity-5">
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+
+                    <div class="relative text-left max-w-2xl">
+                        <span
+                            class="inline-block py-1 px-3 rounded-full bg-[#FFBC00]/10 border border-[#FFBC00]/30 text-[#FFBC00] text-xs font-bold uppercase tracking-widest mb-4">
+                            Go Global
+                        </span>
+
+                        <h2 class="text-4xl md:text-5xl font-black text-white leading-tight">
+                            Experience <br>
+                            <span
+                                class="text-transparent bg-clip-text bg-gradient-to-r from-[#FFBC00] via-[#f59e0b] to-[#009E83]">World
+                                Wonders</span>
+                        </h2>
+
+                        <p
+                            class="mt-6 text-lg text-gray-400 font-light leading-relaxed border-l-2 border-[#FFBC00] pl-4">
+                            Curated international experiences offering the best value. From the futuristic skylines of
+                            Dubai to the serene beaches of Bali.
+                        </p>
+                    </div>
+
+                    <div class="hidden md:flex gap-4">
+                        <button onclick="scrollSlider('featured-tours-wrapper', 'left')"
+                            class="group w-14 h-14 rounded-full border border-white/10 bg-white/5 backdrop-blur-md flex items-center justify-center text-white hover:bg-[#FFBC00] hover:border-[#FFBC00] hover:text-black hover:scale-110 transition-all duration-300 shadow-lg">
+                            <i class="fas fa-arrow-left text-lg group-hover:-translate-x-1 transition-transform"></i>
+                        </button>
+                        <button onclick="scrollSlider('featured-tours-wrapper', 'right')"
+                            class="group w-14 h-14 rounded-full border border-white/10 bg-white/5 backdrop-blur-md flex items-center justify-center text-white hover:bg-[#FFBC00] hover:border-[#FFBC00] hover:text-black hover:scale-110 transition-all duration-300 shadow-lg">
+                            <i class="fas fa-arrow-right text-lg group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="featured-tours-wrapper" class="scrolling-wrapper pb-4">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="search-lightbox"
+        class="fixed inset-0 bg-black/50 backdrop-blur-lg z-[100] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div
+            class="bg-[#007a66]/30 border backdrop-blur-lg border-white/10 w-full max-w-3xl rounded-2xl shadow-2xl text-white p-6 md:p-8 relative transform scale-95 transition-all duration-300">
+            <button id="close-lightbox-btn"
+                class="absolute top-4 right-4 text-white/50 hover:text-white transition-colors text-2xl z-10"><i
+                    class="fas fa-times"></i></button>
+            <div class="w-full max-w-lg mx-auto">
+                <h2 class="text-2xl font-bold text-center mb-2 text-gray-200"
+                    style="font-family: 'Barlow Semi Condensed', sans-serif;">What's your pick for your next vacation?
+                </h2>
+                <div class="relative mt-6 mb-8">
+                    <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-white/40"></i>
+                    <input type="text" id="destination-search-input" placeholder="Pick your destination"
+                        class="w-full bg-white/5 border border-white/20 rounded-lg py-3 pl-12 pr-4 focus:outline-none focus:ring-2 focus:ring-yellow-400 text-white placeholder-white/40">
+                </div>
+                <ul id="search-results-list" class="space-y-2 search-results-list"></ul>
+            </div>
+        </div>
+    </div>
+    <div id="footer-placeholder"></div>
+    <div id="lead-form-placeholder"></div>
+
+    <script src="js/components.js" defer></script>
+
+    <script>
+        // --- NATIVE SLIDER LOGIC ---
+        function scrollSlider(wrapperId, direction) {
+            const container = document.getElementById(wrapperId);
+            const scrollAmount = container.clientWidth * 0.8;
+            if (direction === 'left') {
+                container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            } else {
+                container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+
+            fetch('data/home.json')
+                .then(res => res.json())
+                .then(pageData => initPage(pageData))
+                .catch(err => console.error('Error loading home.json:', err));
+
+            function initPage(data) {
+                updateSEO(data.meta);
+
+                // Render Hero
+                const heroBgDiv = document.querySelector('#hero-section-container div.bg-cover');
+                if (heroBgDiv) {
+                    heroBgDiv.style.backgroundImage = `url(${data.hero.backgroundImage})`;
+                    document.getElementById('hero-badge').innerHTML = `<i class="fas fa-star text-yellow-300 mr-2"></i>${data.hero.badge}`;
+                    document.getElementById('hero-title').innerHTML = `${data.hero.titleLine1}<br>${data.hero.titleLine2}`;
+                    document.getElementById('hero-subtitle').textContent = data.hero.subtitle;
+                }
+
+                // Render Brands
+                const brandsContainer = document.getElementById('brand-logos-container');
+                const isMobile = window.innerWidth < 768;
+                const brandsToRender = isMobile ? [...data.brands, ...data.brands] : data.brands;
+                brandsContainer.innerHTML = brandsToRender.map(brand => `
+                    <div class="logo-wrapper flex-shrink-0 flex items-center justify-center">
+                        <img src="${brand.logoUrl}" alt="${brand.name}" class="${brand.heightClass} brand-logo-filter">
+                    </div>
+                `).join('');
+                if (isMobile) brandsContainer.classList.add('is-animated');
+
+                // Render Sliders
+                renderNativeCards(data.popularDestinations, 'popular-destinations-wrapper');
+                renderNativeCards(data.featuredTours, 'featured-tours-wrapper');
+
+                // Setup Search
+                setupSearch(data.searchDestinations);
+            }
+
+            // --- HELPERS ---
+            function updateSEO(meta) {
+                if (!meta) return;
+                document.title = meta.title;
+                document.querySelector('meta[name="description"]').setAttribute('content', meta.description);
+                document.querySelector('meta[name="keywords"]').setAttribute('content', meta.keywords);
+
+                const script = document.createElement('script');
+                script.type = 'application/ld+json';
+                script.text = JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "TravelAgency",
+                    "name": "Tourishq Travel Solutions",
+                    "description": meta.description,
+                    "url": window.location.href,
+                    "logo": window.location.origin + "/images/tourishq-icon.svg"
+                });
+                document.head.appendChild(script);
+            }
+
+            function renderNativeCards(items, wrapperId) {
+                const wrapper = document.getElementById(wrapperId);
+                if (!wrapper) return;
+                const isDomestic = wrapperId === 'popular-destinations-wrapper';
+                const tagLabel = isDomestic ? 'India' : 'International';
+                wrapper.innerHTML = items.map(item => `
+                    <div class="scrolling-card">
+                        <a href="${item.url}" class="dest-card">
+                            <div class="dest-card-img-wrap">
+                                <img src="${item.image}" alt="${item.name}" loading="lazy"
+                                     onerror="this.src='images/hero.png'">
+                            </div>
+                            <div class="dest-overlay"></div>
+                            <div class="dest-card-content">
+                                <span class="dest-card-name">${item.name}</span>
+                                <div class="dest-card-hover">
+                                    <span class="dest-card-hover-tag">${tagLabel}</span>
+                                    <p class="dest-card-hover-desc">${item.description}</p>
+                                    <span class="dest-card-hover-link">
+                                        Explore Now
+                                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                `).join('');
+            }
+
+            function setupSearch(destinations) {
+                const searchTrigger = document.getElementById('hero-search-trigger');
+                const lightbox = document.getElementById('search-lightbox');
+                const closeBtn = document.getElementById('close-lightbox-btn');
+                const searchInput = document.getElementById('destination-search-input');
+                const resultsList = document.getElementById('search-results-list');
+
+                // FILTER FEATURED ITEMS
+                const featuredItems = destinations.filter(d => d.isFeatured === true);
+
+                const renderList = (items) => {
+                    resultsList.innerHTML = '';
+                    if (items.length === 0) {
+                        resultsList.innerHTML = `<li class="p-4 text-center text-white/50 text-sm">No destinations found matching your search.</li>`;
+                        return;
+                    }
+                    resultsList.innerHTML = items.map(dest => {
+                        const colorClass = dest.color ? `tag-${dest.color}` : 'tag-gray';
+                        return `
+                        <li>
+                            <a href="${dest.url}" class="flex justify-between items-center p-3 rounded-lg hover:bg-white/10 transition-colors duration-200 group cursor-pointer border border-transparent hover:border-white/5">
+                                <div class="flex items-center">
+                                    <i class="fas fa-map-marker-alt text-white/30 mr-3 text-xs group-hover:text-[#009E83] transition-colors"></i>
+                                    <span class="font-medium text-gray-200 group-hover:text-white text-sm md:text-base">${dest.name}</span>
+                                </div>
+                                <span class="suggestion-tag ${colorClass}">${dest.tag}</span>
+                            </a>
+                        </li>`;
+                    }).join('');
+                };
+
+                searchTrigger.addEventListener('click', () => {
+                    renderList(featuredItems);
+                    lightbox.classList.add('is-visible');
+                    document.body.style.overflow = 'hidden';
+                    setTimeout(() => searchInput.focus(), 100);
+                });
+
+                const closeSearch = () => {
+                    lightbox.classList.remove('is-visible');
+                    document.body.style.overflow = '';
+                    searchInput.value = '';
+                };
+
+                closeBtn.addEventListener('click', closeSearch);
+                lightbox.addEventListener('click', (e) => e.target === lightbox && closeSearch());
+                document.addEventListener('keydown', (e) => e.key === 'Escape' && lightbox.classList.contains('is-visible') && closeSearch());
+
+                // INPUT LOGIC
+                searchInput.addEventListener('input', (e) => {
+                    const val = e.target.value.toLowerCase().trim();
+
+                    // If empty, show featured items again
+                    if (!val) {
+                        renderList(featuredItems);
+                        return;
+                    }
+
+                    // If typing, search ALL destinations
+                    const filtered = destinations.filter(d => {
+                        return d.name.toLowerCase().includes(val) || d.tag.toLowerCase().includes(val) || (d.keywords && d.keywords.some(k => k.toLowerCase().includes(val)));
+                    });
+                    renderList(filtered);
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

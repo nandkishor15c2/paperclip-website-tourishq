@@ -1,0 +1,62 @@
+{
+    "meta": {
+      "title": "Tourishq Travel Solutions - Empowering Travel Businesses",
+      "description": "Tourishq Travel Solutions offers personalized travel planning, door-to-door services, and empowers travel businesses with scalable solutions.",
+      "keywords": "travel, tourishq, travel solutions, personalized travel, travel agency, india travel",
+      "ogImage": "images/hero.png"
+    },
+    "hero": {
+      "badge": "Voted best peaceful place in the world",
+      "titleLine1": "The best place to find",
+      "titleLine2": "your <span style='font-family: \"Barlow Semi Condensed\", sans-serif; font-style: italic; font-weight: 600;'>Inner Peace</span>",
+      "subtitle": "Feeling ready to relax? Find the best location to reconnect with nature and find inner calm.",
+      "backgroundImage": "images/hero.png"
+    },
+    "searchDestinations": [
+      { "name": "Bali", "tag": "IN SEASON", "color": "green", "keywords": ["indonesia", "beach", "yoga"], "url": "destinations/region.html?id=bali", "isFeatured": true },
+      { "name": "Maldives", "tag": "HONEYMOON", "color": "pink", "keywords": ["islands", "romance", "luxury"], "url": "destinations/region.html?id=maldives", "isFeatured": true },
+      { "name": "Europe", "tag": "TRENDING", "color": "blue", "keywords": ["history", "cities", "culture"], "url": "destinations/region.html?id=europe", "isFeatured": true },
+      { "name": "Thailand", "tag": "BUDGET", "color": "yellow", "keywords": ["asia", "food", "party"], "url": "destinations/region.html?id=thailand", "isFeatured": true },
+      { "name": "Vietnam", "tag": "POPULAR", "color": "purple", "keywords": ["hanoi", "ha long bay", "pho"], "url": "destinations/region.html?id=vietnam", "isFeatured": true },
+      { "name": "Dubai", "tag": "LUXURY", "color": "gray", "keywords": ["uae", "desert", "shopping"], "url": "destinations/region.html?id=dubai", "isFeatured": true },
+      { "name": "Australia", "tag": "FAMILY", "color": "orange", "keywords": ["sydney", "outback", "koala"], "url": "destinations/region.html?id=australia", "isFeatured": true },
+      { "name": "Rajasthan", "tag": "HERITAGE", "color": "red", "keywords": ["india", "rajasthan", "forts", "palace"], "url": "destinations/region.html?id=rajasthan", "isFeatured": false },
+      { "name": "Kashmir", "tag": "MOUNTAINS", "color": "cyan", "keywords": ["india", "himalayas", "snow"], "url": "destinations/region.html?id=kashmir", "isFeatured": false },
+      { "name": "Kerala", "tag": "NATURE", "color": "teal", "keywords": ["india", "backwaters", "gods own country"], "url": "destinations/region.html?id=kerala", "isFeatured": false },
+      { "name": "Himachal", "tag": "NATURE", "color": "teal", "keywords": ["india", "backwaters", "gods own country"], "url": "destinations/region.html?id=himachal" },
+      { "name": "North-East, India", "tag": "NATURE", "color": "teal", "keywords": ["india", "backwaters", "gods own country"], "url": "destinations/region.html?id=northeast" },
+      { "name": "Spiti", "tag": "NATURE", "color": "teal", "keywords": ["india", "backwaters", "gods own country"], "url": "destinations/region.html?id=spiti" },
+      { "name": "Ladakh", "tag": "NATURE", "color": "teal", "keywords": ["india", "backwaters", "gods own country"], "url": "destinations/region.html?id=ladakh" },
+      { "name": "Uttarakhand", "tag": "NATURE", "color": "teal", "keywords": ["india", "backwaters", "gods own country"], "url": "destinations/region.html?id=uttarakhand" },
+      { "name": "Singapore", "tag": "NATURE", "color": "teal", "keywords": ["india", "backwaters", "gods own country"], "url": "destinations/region.html?id=singapore" },
+      { "name": "Japan", "tag": "NATURE", "color": "teal", "keywords": ["india", "backwaters", "gods own country"], "url": "destinations/region.html?id=japan" }
+    ],
+    "brands": [
+      { "name": "Bali", "logoUrl": "images/ibali.png", "heightClass": "h-12 md:h-13" },
+      { "name": "Thailand", "logoUrl": "images/ithailand.png", "heightClass": "h-12 md:h-13" },
+      { "name": "Expedia", "logoUrl": "images/isouthafrica.png", "heightClass": "h-12 md:h-13" },
+      { "name": "Hopper", "logoUrl": "images/iindia.png", "heightClass": "h-12 md:h-13" },
+      { "name": "MakeMyTrip", "logoUrl": "images/ijapan.png", "heightClass": "h-12 md:h-13" }
+    ],
+    "popularDestinations": [
+      { "name": "Rajasthan", "description": "Ancient temples & serene gardens", "url": "destinations/region.html?id=rajasthan", "image": "images/rajasthanactive.jpg" },
+      { "name": "Himachal", "description": "The city of love and lights", "url": "destinations/region.html?id=himachal", "image": "images/himachalactive.jpg" },
+      { "name": "Kerala", "description": "Iconic sunsets and whitewashed villages", "url": "destinations/region.html?id=kerala", "image": "images/keralaactive.jpg" },
+      { "name": "North-east", "description": "Overwater bungalows in turquoise lagoons", "url": "destinations/region.html?id=northeast", "image": "images/northeastactive.jpg" },
+      { "name": "Spiti", "description": "Eternal city of history and pasta", "url": "destinations/region.html?id=spiti", "image": "images/spitiactive.jpg" },
+      { "name": "Ladakh", "description": "Eternal city of history and pasta", "url": "destinations/region.html?id=ladakh", "image": "images/ladakhactive.jpg" },
+      { "name": "Kashmir", "description": "Eternal city of history and pasta", "url": "destinations/region.html?id=kashmir", "image": "images/kashmiractive.jpg" },
+      { "name": "Uttarakhand", "description": "Eternal city of history and pasta", "url": "destinations/region.html?id=uttarakhand", "image": "images/uttarakhandactive.jpg" }
+    ],
+    "featuredTours": [
+      { "name": "Bali", "description": "10 Days exploring forts and palaces", "url": "destinations/region.html?id=bali", "image": "images/baliactive.jpg" },
+      { "name": "Thailand", "description": "A journey through breathtaking peaks", "url": "destinations/region.html?id=thailand", "image": "images/thailandactive.jpg" },
+      { "name": "Singapore", "description": "Relax on a traditional houseboat", "url": "destinations/region.html?id=singapore", "image": "images/singaporeactive.jpg" },
+      { "name": "Dubai", "description": "Witness ancient rituals on the Ganges", "url": "destinations/region.html?id=dubai", "image": "images/dubaiactive.jpg" },
+      { "name": "Europe", "description": "Sun, sand, and sea in India's party capital", "url": "destinations/region.html?id=europe", "image": "images/europeactive.jpg" },
+      { "name": "Vietnam", "description": "Sun, sand, and sea in India's party capital", "url": "destinations/region.html?id=vietnam", "image": "images/vietnamactive.jpg" },
+      { "name": "Japan", "description": "Sun, sand, and sea in India's party capital", "url": "destinations/region.html?id=japan", "image": "images/japanactive.jpg" },
+      { "name": "Australia", "description": "Sun, sand, and sea in India's party capital", "url": "destinations/region.html?id=australia", "image": "images/australiaactive.jpg" },
+      { "name": "Maldives", "description": "Sun, sand, and sea in India's party capital", "url": "destinations/region.html?id=maldives", "image": "images/maldivesactive.jpg" }
+    ]
+  }
